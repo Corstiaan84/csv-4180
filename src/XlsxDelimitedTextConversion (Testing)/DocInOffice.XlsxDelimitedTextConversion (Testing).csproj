@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{922315D5-3DC0-43A7-A3A9-A3310D4773AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DocInOffice.XlsxDelimitedTextConversion</RootNamespace>
+    <AssemblyName>DocInOffice.XlsxDelimitedTextConversion %28Testing%29</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>IDE0001,IDE0003,IDE0049</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
+    <Compile Include="CsvConverterTesting\MoqDelimitedTextReader.cs" />
+    <Compile Include="CsvConverterTesting\Tester.cs" />
+    <Compile Include="MoqRfc4180Reader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XlsxConverterTesting\MoqDelimitedTextWriter.cs" />
+    <Compile Include="XlsxConverterTesting\TemplateTester.cs" />
+    <Compile Include="XlsxConverterTesting\Tester.cs" />
+    <Compile Include="XlsxConverterTesting\TesterEngine.cs" />
+    <Compile Include="XlsxConverterTesting\TypeTester.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CsvConverterTesting\Tester+Files\01_total.csv" />
+    <None Include="XlsxConverterTesting\Tester+Files\001\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Boolean\02\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Boolean\02\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Boolean\01\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Boolean\01\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Date\02\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Date\02\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Error\01\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Error\01\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\InlineString\04\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\InlineString\04\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Number\01\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Number\01\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Number\02\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Number\02\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\SharedString\02\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\String\02\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\String\02\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\String\01\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\String\01\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\02\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\02\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\04\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\04\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\03\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\03\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\01\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\01\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\InlineString\03\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\InlineString\03\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\InlineString\02\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\InlineString\02\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\InlineString\01\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\InlineString\01\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\SharedString\02\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\SharedString\04\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\SharedString\04\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\SharedString\03\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Date\01\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Date\01\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\SharedString\01\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\SharedString\01\template.csv" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\05\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\05\template.csv" />
+    <None Include="XlsxConverterTesting\TemplateTester+Files\01\template.csv" />
+    <None Include="XlsxConverterTesting\TemplateTester+Files\01\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\06\source.xlsx" />
+    <None Include="XlsxConverterTesting\TypeTester+Files\Value\06\template.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="XlsxConverterTesting\TypeTester+Files\SharedString\03\template.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Csv4180\DocInOffice.Csv4180.csproj">
+      <Project>{e0166814-0509-4bbc-afaf-79c87b221d6c}</Project>
+      <Name>DocInOffice.Csv4180</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XlsxDelimitedTextConversion\DocInOffice.XlsxDelimitedTextConversion.csproj">
+      <Project>{0b778ec7-49b2-4c16-a469-53737da46628}</Project>
+      <Name>DocInOffice.XlsxDelimitedTextConversion</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit">
+      <Version>3.11.0</Version>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter">
+      <Version>3.13.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

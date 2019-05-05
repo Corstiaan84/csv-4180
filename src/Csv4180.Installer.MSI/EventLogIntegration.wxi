@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <Component Id="EventLogIntegration" Guid="*" Win64="$(var.IsOffice64)">
+    <RegistryKey Root="HKLM" Key="SYSTEM\CurrentControlSet\services\eventlog\Application\DocInOffice.Csv4180FileExtension">
+      <RegistryValue Name="EventMessageFile" Type="string" Value="%windir%\Microsoft.NET\Framework\[NETRUNTIME]\EventLogMessages.dll" Action="write" />
+    </RegistryKey>
+  </Component>
+</Include>

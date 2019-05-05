@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <Component Id="DocInOffice.Csv4180" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="DocInOffice.Csv4180.dll" Name="DocInOffice.Csv4180.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+  <Component Id="DocInOffice.Csv4180.FileExtension" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="DocInOffice.Csv4180.FileExtension.dll" Name="DocInOffice.Csv4180.FileExtension.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+  <Component Id="DocInOffice.MSOfficeExtension" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="DocInOffice.MSOfficeExtension.dll" Name="DocInOffice.MSOfficeExtension.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+  <Component Id="DocInOffice.XlsxDelimitedTextConversion" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="DocInOffice.XlsxDelimitedTextConversion.dll" Name="DocInOffice.XlsxDelimitedTextConversion.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+  <Component Id="Ionic.Zip" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="Ionic.Zip.dll" Name="Ionic.Zip.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+  <Component Id="Ude" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="Ude.dll" Name="Ude.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+  <Component Id="NetOffice" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="NetOffice.dll" Name="NetOffice.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+  <Component Id="OfficeApi" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="OfficeApi.dll" Name="OfficeApi.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+  <Component Id="ExcelApi" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="ExcelApi.dll" Name="ExcelApi.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+  <Component Id="VBIDEApi" Guid="*" Win64="$(var.IsOffice64)">
+    <File Id="VBIDEApi.dll" Name="VBIDEApi.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+  </Component>
+</Include>

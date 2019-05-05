@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright © Leonid Maliutin <mals@live.ru> 2016
+-->
+
+<?ifdef Debug?>
+  <?define AppVersion="1.0.6"?>
+  <?define IsOffice64="yes"?>
+  <?define OfficeVersion="14.0"?>
+  <?define OfficeYear="2010"?>
+  <?define ProductUpgradeCode="8FCA08C9-3406-4AAB-8481-638CBDBCE918"?>
+  <?define FilesFolderPath="..\Csv4180.FileExtension\bin\Release\"?>
+<?endif?>
+
+<!-- BEGIN Проверка входящий значений -->
+<?if $(var.AppVersion)=""?>
+<?error AppVersion has not been defined?>
+<?endif?>
+<?if $(var.IsOffice64)=""?>
+<?error IsOffice64 has not been defined?>
+<?endif?>
+<?if $(var.OfficeVersion)=""?>
+<?error OfficeVersion has not been defined?>
+<?endif?>
+<?if $(var.OfficeYear)=""?>
+<?error OfficeYear has not been defined?>
+<?endif?>
+<?if $(var.ProductUpgradeCode)=""?>
+<?error ProductUpgradeCode has not been defined?>
+<?endif?>
+<?if $(var.FilesFolderPath)=""?>
+<?error FilesFolderPath has not been defined?>
+<?endif?>
+<!-- END Проверка входящий значений -->
+
+<?define ProductName="CSV 4180"?>
+<?define HostName="Excel $(var.OfficeYear)"?>
+
+<?if $(var.OfficeVersion)="12.0"?>
+  <?define ConverterClassID="{617F3546-1AA8-4BE0-98C7-057EA88F72F4}"?>
+  <?define ConverterPreferencesClassID="{052F29BB-25C5-4659-9A85-7D4BAEB36916}"?>
+<?elseif $(var.OfficeVersion)="14.0"?>
+  <?define ConverterClassID="{7A3833CD-BA81-4EF1-8A4B-63364677550C}"?>
+  <?define ConverterPreferencesClassID="{F77824CC-EA5C-4878-9F80-FB77BA03DEC9}"?>
+<?elseif $(var.OfficeVersion)="15.0"?>
+  <?define ConverterClassID="{97E9B8F9-1ADB-479A-88E2-7FFB8063C045}"?>
+  <?define ConverterPreferencesClassID="{B6A7E1CC-3BAD-4E7D-92AD-2DFC7336BF29}"?>
+<?elseif $(var.OfficeVersion)="16.0"?>
+  <?define ConverterClassID="{986C126E-24EF-4C3C-9E27-D928CC19972C}"?>
+  <?define ConverterPreferencesClassID="{F48CA6BF-435E-462C-B041-FE15A693E306}"?>
+<?endif?>
+
+<?define CurrentAssemblyVersion="$(var.AppVersion).0"?>
+<?define AssemblyIdentifier="DocInOffice.Csv4180.FileExtension, Version=$(var.CurrentAssemblyVersion), Culture=neutral, PublicKeyToken=b2ab273a354b85f8"?>
+<?define ConverterClassName="DocInOffice.Csv4180.FileExtension.Converter"?>
+<?define ConverterPreferencesClassName="DocInOffice.Csv4180.FileExtension.ConverterPreferences"?>
+<?define ImportExtension="CSV [\[]RFC 4180[\]]" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*"
+           Name="$(var.ProductName) v$(var.AppVersion) ($(var.HostName))"
+           Language="1049"
+           Codepage="1251"
+           Version="$(var.AppVersion)"
+           Manufacturer="Leonid Maliutin"
+           UpgradeCode="$(var.ProductUpgradeCode)"
+  >
+    <Package Id="*"
+             Compressed="yes"
+             Languages="1049"
+             SummaryCodepage="1251"
+             InstallScope="perMachine"
+             InstallPrivileges="elevated"
+             Manufacturer="Leonid Maliutin"
+             Description="$(var.ProductName) ($(var.HostName))"
+             Comments="!(loc.PackageDescription)"
+     />
+
+    <Upgrade Id='$(var.ProductUpgradeCode)'>
+      <UpgradeVersion OnlyDetect='yes' Property='SELFFOUND'
+                      Minimum='$(var.AppVersion)' IncludeMinimum='yes'
+                      Maximum='$(var.AppVersion)' IncludeMaximum='yes' />
+      <UpgradeVersion OnlyDetect='yes' Property='NEWERFOUND'
+                      Minimum='$(var.AppVersion)' IncludeMinimum='no' />
+      <UpgradeVersion OnlyDetect='yes' Property='PREVIOUSFOUND'
+                      Minimum='1.0.0' IncludeMinimum='yes'
+                      Maximum='$(var.AppVersion)' IncludeMaximum='no' />
+    </Upgrade>
+    
+    <MediaTemplate EmbedCab="yes" />
+
+    <?if $(var.IsOffice64)="no"?>
+      <?if $(var.OfficeVersion) = "12.0" ?>
+        <WixVariable Id="HostDispalyName" Value="Microsoft $(var.HostName) со 2-ым (или следующим) пакетом обновлений" />
+      <?else?>
+        <WixVariable Id="HostDispalyName" Value="Microsoft $(var.HostName) (32-bit)" />
+      <?endif?>
+    <?elseif $(var.IsOffice64)="yes"?>
+      <WixVariable Id="HostDispalyName" Value="Microsoft $(var.HostName) (64-bit)" />
+    <?endif?>
+
+    <WixVariable Id="ProductDisplayName" Value="$(var.ProductName) ($(var.HostName))" />
+
+    <!-- Свойства "Add or Remove Programs Entries". https://www.firegiant.com/wix/tutorial/com-expression-syntax-miscellanea/add-or-remove-programs-entries/-->
+    <Property Id='ARPCOMMENTS'>!(loc.PackageDescription)</Property>
+    <Property Id='ARPCONTACT'>support@docinoffice.ru</Property>
+    <Property Id='ARPHELPLINK'>http://www.docinoffice.ru/csv-4180</Property>
+    <Property Id='ARPURLINFOABOUT'>http://www.docinoffice.ru/contacts</Property>
+    <!--<Property Id='ARPURLUPDATEINFO'>https://twitter.com/docinwords</Property>-->
+    <!--<Property Id='ARPHELPTELEPHONE'>URL for technical support</Property>-->
+    <!--<Property Id='ARPREADME'>path</Property>-->
+    <!--<Property Id='ARPSIZE'>app size in kilobytes</Property>-->
+    <!--<Property Id="ARPNOREPAIR">1</Property>-->
+    <!--<Property Id="ARPNOMODIFY">1</Property>-->
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+    <Icon Id="icon.ico" SourceFile="csv-4180.ico"/>
+
+    <?if $(var.Platform) = x64 ?>
+    <Condition Message="(loc.Only64BitMessage)"><![CDATA[VersionNT64]]></Condition>
+    <?else ?>
+    <Condition Message="!(loc.Only32BitMessage)"><![CDATA[NOT VersionNT64]]></Condition>
+    <?endif ?>
+
+    <Property Id="HOSTPATH">
+      <RegistrySearch Id="RegSearch_HOSTEXE" Root="HKLM" Key="SOFTWARE\Microsoft\Office\$(var.OfficeVersion)\Excel\InstallRoot" Name="Path" Type="directory" Win64="$(var.IsOffice64)">
+        <?if $(var.OfficeVersion) = "12.0" ?>
+        <FileSearch Name="EXCEL.EXE" MinVersion ="12.0.6424.1000" />
+        <?else?>
+        <FileSearch Name="EXCEL.EXE" />
+        <?endif?>
+      </RegistrySearch>
+    </Property>
+
+    <!-- Подключаем функционал для проверки .NET 4.0 и выше.-->
+    <PropertyRef Id="NETFRAMEWORK40FULL" />
+
+    <!-- Определяем наличиие Microsoft .NET Framework версии 3.5 SP1. http://wixtoolset.org/documentation/manual/v3/howtos/redistributables_and_install_checks/check_for_dotnet.html -->
+    <Condition Message="!(loc.NetConditionMessage)">Installed OR NETFRAMEWORK40FULL</Condition>
+
+    <!-- Определяем, что Host установлен. -->
+    <Condition Message="!(loc.HostConditionMessage)">Installed OR HOSTPATH</Condition>
+
+    <CustomAction Id='CurrentVersionMessage' Error='!(loc.CurrentVersionMessage)' />
+    <CustomAction Id='NextVersionMessage' Error='!(loc.NextVersionMessage)' />
+    <CustomAction Id='PreviousVersionMessage' Error='!(loc.PreviousVersionMessage)' />
+    
+		<Feature Id="ProductFeature" Title="Csv4180_Installer" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+    <Property Id="NETRUNTIME" Value="v4.0.30319" Secure="yes"/>
+
+    <InstallExecuteSequence>
+      <Custom Action='CurrentVersionMessage' After='FindRelatedProducts'>SELFFOUND</Custom>
+      <Custom Action='NextVersionMessage' After='FindRelatedProducts'>NEWERFOUND</Custom>
+      <Custom Action='PreviousVersionMessage' After='FindRelatedProducts'>PREVIOUSFOUND</Custom>
+    </InstallExecuteSequence>
+	</Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <?if $(var.IsOffice64)="no"?>
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="DocInOffice_Folder" Name="DocInOffice">
+          <Directory Id="INSTALLFOLDER" Name="$(var.ProductName)" />
+        </Directory>
+      </Directory>
+      <?elseif $(var.IsOffice64)="yes"?>
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="DocInOffice_Folder" Name="DocInOffice">
+          <Directory Id="INSTALLFOLDER" Name="$(var.ProductName)" />
+        </Directory>
+      </Directory>
+      <?endif ?>
+    </Directory>
+  </Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <?include Assemblies.wxi?>
+      <?include CsvFileExcelExtension.wxi?>
+      <?include EventLogIntegration.wxi?>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
