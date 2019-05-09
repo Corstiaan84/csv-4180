@@ -7,7 +7,7 @@ $Configuration = "Release"
 $binDir = ".\bin\$Configuration\"
 $versionParametrs = (& "..\AssemblyInfo.Shared.ps1")
 $AppVersion = $versionParametrs.Csv4180Version + "." + $versionParametrs.BuildNumber
-$FilesFolderPath = "..\Csv4180.FileExtension\bin\$Configuration\"
+$BinFolderPath = "..\Csv4180.FileExtension\bin\"
 $LicensePath = (Get-Item "..\Licences\licence (CSV 4180).rtf").FullName
 $NetSetupPath = (Get-Item "..\Libraries\dotNetFx40_Full_setup.exe").FullName
 
@@ -42,6 +42,8 @@ $binDir=(Get-Item $binDir).FullName
     ( @{"Platform"="x86"; "IsOffice64"="no"}, @{"Platform"="x64"; "IsOffice64"="no"}, @{"Platform"="x64"; "IsOffice64"="yes"} ) | ForEach-Object {
         $Platform = $_.Platform
         $IsOffice64 = $_.IsOffice64
+		
+		$FilesFolderPath = Join-Path $BinFolderPath "$Platform\$Configuration\"
         
 		& "$MSBuildPath" /target:Rebuild /p:Configuration="$Configuration" /p:Platform="$Platform" /p:AppVersion="$AppVersion" /p:OfficeVersion="$OfficeVersion" /p:OfficeYear="$OfficeYear" /p:IsOffice64="$IsOffice64" /p:ProductUpgradeCode="$UpgradeCode" /p:FilesFolderPath="$FilesFolderPath" "..\Csv4180.Installer.MSI\Csv4180.Installer.MSI.wixproj"
 		If ($LASTEXITCODE -ne 0) { throw [System.Exception] }

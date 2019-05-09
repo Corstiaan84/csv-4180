@@ -91,7 +91,7 @@
     <Exec Command='REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\EventLog\Application\DocInOffice.Csv4180FileExtension" /v "EventMessageFile" /t REG_SZ /d "%%windir%%\Microsoft.NET\Framework\$(RuntimeVersion)\EventLogMessages.dll" /f /reg:$(RegBits)' />
   </Target>
 
-  <Target Name="Unregister">
+  <Target Name="Unregister" Condition=" '$(Configuration)' != 'Release' ">
     <Exec Command='REG DELETE "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
     <Exec Command='REG DELETE "HKLM\SOFTWARE\Classes\AppID\$(ConverterClassID)" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
     <Exec Command='REG DELETE "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />

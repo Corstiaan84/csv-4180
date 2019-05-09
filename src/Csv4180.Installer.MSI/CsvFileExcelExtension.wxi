@@ -5,7 +5,7 @@
 <Include>
   <Component Id="XlsxRfc4180" Guid="*" Win64="$(var.IsOffice64)">
     <!-- Converter -->
-    <RegistryKey Root="HKCR" Key="CLSID\$(var.ConverterClassID)">
+    <RegistryKey Root="HKLM" Key="SOFTWARE\Classes\CLSID\$(var.ConverterClassID)">
       <RegistryValue Name="AppID" Value="$(var.ConverterClassID)" Type="string" Action="write" />
       <RegistryKey Key="Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes" />
       <RegistryKey Key="InprocServer32" >
@@ -21,11 +21,11 @@
         </RegistryKey>
       </RegistryKey>
     </RegistryKey>
-    <RegistryKey Root="HKCR" Key="AppID\$(var.ConverterClassID)">
+    <RegistryKey Root="HKLM" Key="SOFTWARE\Classes\AppID\$(var.ConverterClassID)">
       <RegistryValue Name="DllSurrogate" Value="" Type="string" Action="write" />
     </RegistryKey>
     <!-- ConverterPreferences -->
-    <RegistryKey Root="HKCR" Key="CLSID\$(var.ConverterPreferencesClassID)">
+    <RegistryKey Root="HKLM" Key="SOFTWARE\Classes\CLSID\$(var.ConverterPreferencesClassID)">
       <RegistryKey Key="Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes" />
       <RegistryKey Key="InprocServer32">
         <RegistryValue Value="mscoree.dll" Type="string" Action="write" />
