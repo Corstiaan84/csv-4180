@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    Copyright © Leonid Maliutin <mals@live.ru> 2019
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="15.0">
+
+  <PropertyGroup>
+    <ConverterClassId>{2B2A8095-CD42-4762-84E1-EEFD600C5CB3}</ConverterClassId>
+    <ConverterClassName>DocInOffice.Csv4180.FileExtension.Converter</ConverterClassName>
+    <ConverterPreferencesClassID>{0829ED03-0E73-430C-831E-CB5DEBEDEB31}</ConverterPreferencesClassID>
+    <ConverterPreferencesClassName>DocInOffice.Csv4180.FileExtension.ConverterPreferences</ConverterPreferencesClassName>
+    <RuntimeVersion>v4.0.30319</RuntimeVersion>
+    <ImportExtension>CSV [RFC 4180]</ImportExtension>
+  </PropertyGroup>
+  <ItemGroup>
+    <OfficeVersion Include="12.0;14.0;15.0;16.0" />
+  </ItemGroup>
+  <PropertyGroup>
+    <RegBits>32</RegBits>
+    <RegBits Condition=" '$(PlatformTarget)' == 'x64' ">64</RegBits>
+  </PropertyGroup>
+  <Target Name="Register" Condition=" '$(Configuration)' != 'Release' ">
+    <CombinePath BasePath="$(OutputPath)" Paths="$(AssemblyName).dll">
+      <Output TaskParameter="CombinedPaths" PropertyName="AssemblyPath" />
+    </CombinePath>
+    <ConvertToAbsolutePath Paths="$(AssemblyPath)">
+      <Output TaskParameter="AbsolutePaths" PropertyName="CodeBase"/>
+    </ConvertToAbsolutePath>
+    <GetAssemblyIdentity AssemblyFiles="$(CodeBase)">
+      <Output TaskParameter="Assemblies" ItemName="MyAssemblyIdentities"/>
+    </GetAssemblyIdentity>
+    <PropertyGroup>
+      <AssemblyIdentifier>%(MyAssemblyIdentities.Identity)</AssemblyIdentifier>
+      <CurrentAssemblyVersion>%(MyAssemblyIdentities.Version)</CurrentAssemblyVersion>
+    </PropertyGroup>
+    <!-- Converter class -->
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)" /v "AppID" /t REG_SZ /d "$(ConverterClassId)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32" /ve /t REG_SZ /d "mscoree.dll" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32" /v "Assembly" /t REG_SZ /d "$(AssemblyIdentifier)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32" /v "Class" /t REG_SZ /d "$(ConverterClassName)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32" /v "CodeBase" /t REG_SZ /d "$(CodeBase)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32" /v "RuntimeVersion" /t REG_SZ /d "$(RuntimeVersion)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32" /v "ThreadingModel" /t REG_SZ /d "Both" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32\$(CurrentAssemblyVersion)" /v "Assembly" /t REG_SZ /d "$(AssemblyIdentifier)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32\$(CurrentAssemblyVersion)" /v "Class" /t REG_SZ /d "$(ConverterClassName)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32\$(CurrentAssemblyVersion)" /v "CodeBase" /t REG_SZ /d "$(CodeBase)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)\InprocServer32\$(CurrentAssemblyVersion)" /v "RuntimeVersion" /t REG_SZ /d "$(RuntimeVersion)" /f /reg:$(RegBits)' />
+
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\AppID\$(ConverterClassID)" /v "DllSurrogate" /t REG_SZ /f /reg:$(RegBits)' />
+
+    <!-- ConverterPreferences class -->
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)" /v "AppID" /t REG_SZ /d "$(ConverterPreferencesClassID)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32" /ve /t REG_SZ /d "mscoree.dll" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32" /v "Assembly" /t REG_SZ /d "$(AssemblyIdentifier)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32" /v "Class" /t REG_SZ /d "$(ConverterPreferencesClassName)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32" /v "CodeBase" /t REG_SZ /d "$(CodeBase)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32" /v "RuntimeVersion" /t REG_SZ /d "$(RuntimeVersion)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32" /v "ThreadingModel" /t REG_SZ /d "Both" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32\$(CurrentAssemblyVersion)" /v "Assembly" /t REG_SZ /d "$(AssemblyIdentifier)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32\$(CurrentAssemblyVersion)" /v "Class" /t REG_SZ /d "$(ConverterPreferencesClassName)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32\$(CurrentAssemblyVersion)" /v "CodeBase" /t REG_SZ /d "$(CodeBase)" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)\InprocServer32\$(CurrentAssemblyVersion)" /v "RuntimeVersion" /t REG_SZ /d "$(RuntimeVersion)" /f /reg:$(RegBits)' />
+
+    <!-- Excel Extension -->
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 1" /v "Extensions" /t REG_SZ /d "csv" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 1" /v "Name" /t REG_SZ /d "CSV [RFC 4180] UTF-8" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 1" /v "CLSID" /t REG_SZ /d "$(ConverterClassID)" /f /reg:$(RegBits)' />
+
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 2" /v "Extensions" /t REG_SZ /d "csv" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 2" /v "Name" /t REG_SZ /d "CSV [RFC 4180] UTF-16" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 2" /v "CLSID" /t REG_SZ /d "$(ConverterClassID)" /f /reg:$(RegBits)' />
+    
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 3" /v "Extensions" /t REG_SZ /d "csv" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 3" /v "Name" /t REG_SZ /d "CSV [RFC 4180] UTF-32" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 3" /v "CLSID" /t REG_SZ /d "$(ConverterClassID)" /f /reg:$(RegBits)' />
+
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 4" /v "Extensions" /t REG_SZ /d "csv" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 4" /v "Name" /t REG_SZ /d "CSV [RFC 4180] OEM" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 4" /v "CLSID" /t REG_SZ /d "$(ConverterClassID)" /f /reg:$(RegBits)' />
+
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Import\$(ImportExtension)" /v "Extensions" /t REG_SZ /d "csv" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Import\$(ImportExtension)" /v "Name" /t REG_SZ /d "CSV [RFC 4180]" /f /reg:$(RegBits)' />
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Import\$(ImportExtension)" /v "CLSID" /t REG_SZ /d "$(ConverterClassID)" /f /reg:$(RegBits)' />
+
+    <Exec Command='REG ADD "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\Defaults" /v "csv" /t REG_SZ /d "$(ImportExtension)" /f /reg:$(RegBits)' />    
+    
+    <!-- EventLog -->
+    <Exec Command='REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\EventLog\Application\DocInOffice.Csv4180FileExtension" /v "EventMessageFile" /t REG_SZ /d "%%windir%%\Microsoft.NET\Framework\$(RuntimeVersion)\EventLogMessages.dll" /f /reg:$(RegBits)' />
+  </Target>
+
+  <Target Name="Unregister">
+    <Exec Command='REG DELETE "HKLM\SOFTWARE\Classes\CLSID\$(ConverterClassId)" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+    <Exec Command='REG DELETE "HKLM\SOFTWARE\Classes\AppID\$(ConverterClassID)" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+    <Exec Command='REG DELETE "HKLM\SOFTWARE\Classes\CLSID\$(ConverterPreferencesClassID)" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+    <Exec Command='REG DELETE "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 1" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+    <Exec Command='REG DELETE "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 2" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+    <Exec Command='REG DELETE "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 3" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+    <Exec Command='REG DELETE "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Export\CSV [RFC 4180] 4" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+    <Exec Command='REG DELETE "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\OOXML Converters\Import\$(ImportExtension)" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+    <Exec Command='REG DELETE "HKLM\SOFTWARE\Microsoft\Office\%(OfficeVersion.Identity)\Excel\Text Converters\Defaults" /v "csv" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+    <Exec Command='REG DELETE "HKLM\SYSTEM\CurrentControlSet\Services\EventLog\Application\DocInOffice.Csv4180FileExtension" /f /reg:$(RegBits)' ContinueOnError="true" IgnoreExitCode="true" />
+  </Target>
+</Project>

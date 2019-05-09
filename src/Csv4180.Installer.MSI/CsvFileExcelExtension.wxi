@@ -42,6 +42,7 @@
     </RegistryKey>
   </Component>
   <Component Id="XlsxRfc4180ExcelTextConverter" Guid="*" Win64="$(var.IsOffice64)">
+    <!-- Excel Extension -->
     <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Office\$(var.OfficeVersion)\Excel\Text Converters">
       <RegistryKey Key="OOXML Converters\Export">
         <RegistryKey Key="CSV [\[]RFC 4180[\]] 1">
