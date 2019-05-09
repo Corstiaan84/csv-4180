@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?ifndef Configuration ?>
+  <?error "AppVersion is not difined."?>
+  <?endif?>
+  
+  <?if "$(var.Configuration)"="Debug"?>
+  <?define FilesFolderPath="..\Csv4180.FileExtension\bin\$(var.Configuration)\"?>
+  <?define AppVersion=1.0.21?>
+  <?define ProductUpgradeCode="{1A21A4B7-0174-459B-BEAC-F0A32652F515}"?>
+  <?endif?>
+
+  <?ifndef AppVersion ?>
+  <?error "AppVersion is not difined."?>
+  <?endif?>
+  <?ifndef ProductUpgradeCode ?>
+  <?error "ProductUpgradeCode is not difined."?>
+  <?endif?>
+  <?ifndef FilesFolderPath ?>
+  <?error "FilesFolderPath is not difined."?>
+  <?endif?>
+
+  <?define ProductName="CSV 4180"?>
+  <?define HostName="Excel"?>
+
+  <?define ConverterClassID="{AE9845CC-E17B-46E4-9D7B-6F94CF5900D9}"?>
+  <?define ConverterPreferencesClassID="{48CD5D68-D510-498F-9F1E-076AC6076A34}"?>
+
+  <?define CurrentAssemblyVersion="$(var.AppVersion).0"?>
+  <?define AssemblyIdentifier="DocInOffice.Csv4180.FileExtension, Version=$(var.CurrentAssemblyVersion), Culture=neutral, PublicKeyToken=b2ab273a354b85f8"?>
+  <?define ConverterClassName="DocInOffice.Csv4180.FileExtension.Converter"?>
+  <?define ConverterPreferencesClassName="DocInOffice.Csv4180.FileExtension.ConverterPreferences"?>
+  <?define ImportExtension="CSV [\[]RFC 4180[\]]" ?>
+</Include>

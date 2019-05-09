@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="15.0"
+         DefaultTargets="Build">
+
+  <!--<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <AppVersion Condition=" '$(AppVersion)' == ''">1.0.21</AppVersion>
+    <ProductUpgradeCode Condition=" '$(ProductUpgradeCode)' == '' ">{8FCA08C9-3406-4AAB-8481-638CBDBCE918}</ProductUpgradeCode>
+    <Msi32Path>..\Csv4180.Installer.MSI\bin\x86\Release\en-US\CSV_4180.msi</Msi32Path>
+    <Msi64Path>..\Csv4180.Installer.MSI\bin\x64\Release\en-US\CSV_4180.msi</Msi64Path>
+  </PropertyGroup>-->
+
+  <ItemGroup>
+    <IssIdentifier Include="Configuration">
+      <Value>$(Configuration)</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="AppVersion">
+      <Value>$(AppVersion)</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="Msi32Path">
+      <Value>$(Msi32Path)</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="Msi64Path">
+      <Value>$(Msi64Path)</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="LicensePath">
+      <Value>..\..\LICENSE</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="NetSetupPath">
+      <Value>..\Libraries\dotNetFx40_Full_setup.exe</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="UpgradeCode">
+      <Value>$(ProductUpgradeCode)</Value>
+    </IssIdentifier>
+    
+    <IssIdentifier Include="OutputDir">
+      <Value>.\bin\Release\</Value>
+    </IssIdentifier>
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <IssFilePath>setup.iss</IssFilePath>
+    <IsccExePath>..\Libraries\Inno Setup 5\ISCC.exe</IsccExePath>
+  </PropertyGroup>
+
+  <Target Name="AssertProperties">
+    <Error Condition=" '$(Configuration)' == '' " Text="The Configuration property is not defined." />
+    <Error Condition=" '$(AppVersion)' == '' " Text="The AppVersion property is not defined." />
+    <Error Condition=" '$(ProductUpgradeCode)' == '' " Text="The ProductUpgradeCode property is not defined." />
+    <Error Condition=" '$(Msi32Path)' == '' " Text="The Msi32Path property is not defined." />
+    <Error Condition=" '$(Msi64Path)' == '' " Text="The Msi64Path property is not defined." />
+  </Target>
+  
+  <Target Name="BuildSetupExe" DependsOnTargets="AssertProperties">
+    <Exec Command='"$(IsccExePath)" @(IssIdentifier -> &apos;/D%(Identity)="%(Value)"&apos;, &apos; &apos;) "$(IssFilePath)"' />
+  </Target>
+
+  <PropertyGroup>
+    <BuildDependsOn>BuildSetupExe</BuildDependsOn>
+    <!--<CleanDependsOn>CleanDotNetInstallerCache</CleanDependsOn>-->
+  </PropertyGroup>
+
+  <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
+  <!--<Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />-->
+</Project>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include ..\Product.wxi ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <ComponentGroup Id="MainAssemblies" Directory="INSTALLFOLDER">
+      <Component Id="DocInOffice.Csv4180" Guid="*">
+        <File Id="DocInOffice.Csv4180.dll" Name="DocInOffice.Csv4180.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="DocInOffice.Csv4180.FileExtension" Guid="*">
+        <File Id="DocInOffice.Csv4180.FileExtension.dll" Name="DocInOffice.Csv4180.FileExtension.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="DocInOffice.MSOfficeExtension" Guid="*">
+        <File Id="DocInOffice.MSOfficeExtension.dll" Name="DocInOffice.MSOfficeExtension.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="DocInOffice.XlsxDelimitedTextConversion" Guid="*">
+        <File Id="DocInOffice.XlsxDelimitedTextConversion.dll" Name="DocInOffice.XlsxDelimitedTextConversion.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="Ionic.Zip" Guid="*">
+        <File Id="Ionic.Zip.dll" Name="Ionic.Zip.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="Ude" Guid="*">
+        <File Id="Ude.dll" Name="Ude.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="NetOffice" Guid="*">
+        <File Id="NetOffice.dll" Name="NetOffice.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="OfficeApi" Guid="*">
+        <File Id="OfficeApi.dll" Name="OfficeApi.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="ExcelApi" Guid="*">
+        <File Id="ExcelApi.dll" Name="ExcelApi.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="VBIDEApi" Guid="*">
+        <File Id="VBIDEApi.dll" Name="VBIDEApi.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+</Wix>

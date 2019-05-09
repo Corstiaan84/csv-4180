@@ -1,0 +1,1 @@
+2019-05-21 Inno-Setup 6 does not support Windows XP.

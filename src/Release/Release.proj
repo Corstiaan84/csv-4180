@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="15.0"
+         DefaultTargets="Build">
+
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"/>
+
+  <PropertyGroup>
+    <Configuration>Release</Configuration>
+    <ProductUpgradeCode>{1A21A4B7-0174-459B-BEAC-F0A32652F515}</ProductUpgradeCode>
+    <FilesFolderPath>..\Csv4180.FileExtension\bin\$(Configuration)\</FilesFolderPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SignFilePath Condition=" '$(SignFilePath)' == '' " >CodeSigning_2019-08-16.p12</SignFilePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <MsiFilePath Include="..\Csv4180.Installer.MSI\bin\x86\Release\en-US\CSV_4180.msi">
+      <Platform>x86</Platform>
+    </MsiFilePath>
+    <MsiFilePath Include="..\Csv4180.Installer.MSI\bin\x64\Release\en-US\CSV_4180.msi">
+      <Platform>x64</Platform>
+    </MsiFilePath>
+  </ItemGroup>
+
+  <ItemGroup>
+    <FileExtensionAssembly Include="..\Csv4180.FileExtension\bin\Release\DocInOffice.Csv4180.FileExtension.dll" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <SigntoolPath>..\Libraries\WinSDK\x86\signtool.exe</SigntoolPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath>
+    <OutputPath>bin\</OutputPath>
+    <!--<CleanFile Condition=" '$(CleanFile)'=='' ">$(MSBuildProjectFile).FileListAbsolute.txt</CleanFile>-->
+  </PropertyGroup>
+
+  <Target Name="RebuildSolution">
+    <MSBuild Projects="..\CSV 4180.sln" Targets="Rebuild" Properties="Configuration=$(Configuration);Platform=%(MsiFilePath.Platform)" />
+    <Message Text ="%(FileExtensionAssembly.FullPath)" />
+    <GetAssemblyIdentity AssemblyFiles="%(FileExtensionAssembly.FullPath)">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
+    </GetAssemblyIdentity>
+    <PropertyGroup>
+      <FileExtensionAssemblyVersion>%(AssemblyVersion.Version)</FileExtensionAssemblyVersion>
+    </PropertyGroup>
+    <Message Importance="high" Text="FileExtension Assembly Version: $(FileExtensionAssemblyVersion)" />
+    <PropertyGroup>
+      <AppVersion>$(FileExtensionAssemblyVersion.Substring(0, $(FileExtensionAssemblyVersion.LastIndexOf('.'))))</AppVersion>
+    </PropertyGroup>
+    <Message Importance="high" Text="AppVersion: $(AppVersion)" />
+  </Target>
+  <Target Name="RebuildMsi">
+    <MSBuild Projects="..\Csv4180.Installer.MSI\Csv4180.Installer.MSI.wixproj" Targets="Rebuild" Properties='Configuration=$(Configuration);Platform=%(MsiFilePath.Platform);AppVersion=$(AppVersion);ProductUpgradeCode=$(ProductUpgradeCode);FilesFolderPath=$(FilesFolderPath)' />
+  </Target>
+  <Target Name="CopyMsiFiles">
+    <ItemGroup>
+      <ProcessedMsiFile Include="@(MsiFilePath)">
+        <ProcessedFilePath>$(IntermediateOutputPath)%(Filename)_%(Platform)%(Extension)</ProcessedFilePath>
+        <Platform>%(Platform)</Platform>
+      </ProcessedMsiFile>
+    </ItemGroup>
+    <Copy SourceFiles="%(ProcessedMsiFile.Identity)" DestinationFiles="%(ProcessedFilePath)" OverwriteReadOnlyFiles="true" />
+  </Target>
+  <Target Name="AssertSignPassword">
+    <Error Condition="!Exists($(SignFilePath))" Text='The sign file "$(SignFilePath)" has not been found.' />
+    <Error Condition=" '$(SignPassword)' == '' " Text="The sign password has not been defined." />
+  </Target>
+  <Target Name="SignMsiFiles" Condition=" '$(SignPassword)' != '' " DependsOnTargets="AssertSignPassword">
+    <Message Text="MsiFile: %(MsiFile.Identity)" />
+    <Exec Command='"$(SigntoolPath)" sign /f "$(SignFilePath)" /p "$(SignPassword)" /fd sha256 /tr "http://sha256timestamp.ws.symantec.com/sha256/timestamp" /td sha256 /v "%(ProcessedMsiFile.ProcessedFilePath)"' />
+  </Target>
+  <Target Name="CreateExeSetup">
+    <PropertyGroup>
+      <Msi32Path Condition="$([System.String]::Equals(%(ProcessedMsiFile.Platform), 'x86')) ">$([System.IO.Path]::GetFullPath(%(ProcessedMsiFile.ProcessedFilePath)))</Msi32Path>
+      <Msi64Path Condition="$([System.String]::Equals(%(ProcessedMsiFile.Platform), 'x64')) ">$([System.IO.Path]::GetFullPath(%(ProcessedMsiFile.ProcessedFilePath)))</Msi64Path>
+    </PropertyGroup>
+    <Message Text="Msi32Path: $(Msi32Path)" />
+    <Message Text="Msi64Path: $(Msi64Path)" />
+    <MSBuild Projects="..\Csv4180.Installer.EXE\ExeSetup.proj" Properties="Configuration=$(Configuration);AppVersion=$(AppVersion);ProductUpgradeCode=$(ProductUpgradeCode);Msi32Path=$(Msi32Path);Msi64Path=$(Msi64Path)" />
+  </Target>
+  <Target Name="CopySetupFile">
+    <ItemGroup>
+      <SetupFilePath Include="..\Csv4180.Installer.EXE\bin\Release\CSV_4180_v$(AppVersion).exe">
+        <ProcessedFilePath>$(IntermediateOutputPath)CSV_4180_v$(AppVersion).exe</ProcessedFilePath>
+        <OutputFilePath>$([System.IO.Path]::Combine('$(OutputPath)', '$(Configuration)', 'CSV_4180_v$(AppVersion).exe'))</OutputFilePath>
+      </SetupFilePath>
+    </ItemGroup>
+    <Copy SourceFiles="%(SetupFilePath.Identity)" DestinationFiles="%(ProcessedFilePath)" OverwriteReadOnlyFiles="true" />
+  </Target>
+  <Target Name="SignSetupFile" Condition=" '$(SignPassword)' != '' " DependsOnTargets="AssertSignPassword">
+    <Message Text="SignSetupFile" />
+    <Exec Command='"$(SigntoolPath)" sign /f "$(SignFilePath)" /p "$(SignPassword)" /fd sha1 /t "http://timestamp.verisign.com/scripts/timstamp.dll" /v "%(SetupFilePath.ProcessedFilePath)"' />
+    <Exec Command='"$(SigntoolPath)" sign /as /f "$(SignFilePath)" /p "$(SignPassword)" /fd sha256 /tr "http://sha256timestamp.ws.symantec.com/sha256/timestamp" /td sha256 /v "%(SetupFilePath.ProcessedFilePath)"' />
+  </Target>
+  <Target Name="CopyReadySetupFile">
+    <Message Text="%(SetupFilePath.OutputFilePath)" />
+    <Copy SourceFiles="%(SetupFilePath.ProcessedFilePath)" DestinationFiles="%(OutputFilePath)" OverwriteReadOnlyFiles="true" />
+  </Target>
+  <PropertyGroup>
+    <BuildDependsOn>RebuildSolution;RebuildMsi;CopyMsiFiles;SignMsiFiles;CreateExeSetup;CopySetupFile;SignSetupFile;CopyReadySetupFile</BuildDependsOn>
+    <!--<CleanDependsOn>CleanDotNetInstallerCache</CleanDependsOn>-->
+  </PropertyGroup>
+
+  <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
+</Project>

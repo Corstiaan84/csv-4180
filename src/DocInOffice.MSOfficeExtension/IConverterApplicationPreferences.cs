@@ -1,8 +1,4 @@
-﻿//
-// Copyright © Leonid Maliutin <mals@live.ru> 2016
-//
-
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 
 namespace DocInOffice.MSOfficeExtension

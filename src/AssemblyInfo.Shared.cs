@@ -1,7 +1,7 @@
 using System.Reflection;
 
-[assembly: AssemblyCopyright("Copyright © Leonid Maliutin <mals@live.ru> 2019")]
-[assembly: AssemblyTrademark("docinoffice")]
+[assembly: AssemblyCopyright("")]
+[assembly: AssemblyTrademark("")]
 
 namespace DocInOffice
 {

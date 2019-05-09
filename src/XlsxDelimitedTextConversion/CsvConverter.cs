@@ -1,8 +1,4 @@
-﻿// 
-//Copyright © Leonid S. Maliutin <mals@live.ru> 2014
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
