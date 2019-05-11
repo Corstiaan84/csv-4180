@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright © Leonid Maliutin <mals@live.ru> 2016
+-->
+<?include ..\Product.wxi?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <ComponentGroup Id="Rfc4180ExcelExtension" Directory="INSTALLFOLDER">
+      <Component Id="Rfc4180ExcelExtension" Guid="*" Win64="$(var.IsOffice64)">
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Office\$(var.OfficeVersion)\Excel\Text Converters">
+          <RegistryKey Key="OOXML Converters\Export">
+            <RegistryKey Key="CSV [\[]RFC 4180[\]] 1">
+              <RegistryValue Name="Extensions" Value="csv" Type="string" Action="write" />
+              <RegistryValue Name="Name" Value="CSV [\[]RFC 4180[\]] UTF-8" Type="string" Action="write" />
+              <RegistryValue Name="CLSID" Value="$(var.ConverterClassID)" Type="string" Action="write" />
+            </RegistryKey>
+            <RegistryKey Key="CSV [\[]RFC 4180[\]] 2">
+              <RegistryValue Name="Extensions" Value="csv" Type="string" Action="write" />
+              <RegistryValue Name="Name" Value="CSV [\[]RFC 4180[\]] UTF-16" Type="string" Action="write" />
+              <RegistryValue Name="CLSID" Value="$(var.ConverterClassID)" Type="string" Action="write" />
+            </RegistryKey>
+            <RegistryKey Key="CSV [\[]RFC 4180[\]] 3">
+              <RegistryValue Name="Extensions" Value="csv" Type="string" Action="write" />
+              <RegistryValue Name="Name" Value="CSV [\[]RFC 4180[\]] UTF-32" Type="string" Action="write" />
+              <RegistryValue Name="CLSID" Value="$(var.ConverterClassID)" Type="string" Action="write" />
+            </RegistryKey>
+            <RegistryKey Key="CSV [\[]RFC 4180[\]] 4">
+              <RegistryValue Name="Extensions" Value="csv" Type="string" Action="write" />
+              <RegistryValue Name="Name" Value="CSV [\[]RFC 4180[\]] OEM" Type="string" Action="write" />
+              <RegistryValue Name="CLSID" Value="$(var.ConverterClassID)" Type="string" Action="write" />
+            </RegistryKey>
+          </RegistryKey>
+          <RegistryKey Key="OOXML Converters\Import">
+            <RegistryKey Key="$(var.ImportExtension)">
+              <RegistryValue Name="Extensions" Value="csv" Type="string" Action="write" />
+              <RegistryValue Name="Name" Value="CSV [\[]RFC 4180[\]]" Type="string" Action="write" />
+              <RegistryValue Name="CLSID" Value="$(var.ConverterClassID)" Type="string" Action="write" />
+            </RegistryKey>
+          </RegistryKey>
+          <RegistryKey Key="Defaults" >
+            <RegistryValue Name="csv" Value="$(var.ImportExtension)" Type="string" Action="write" />
+          </RegistryKey>
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

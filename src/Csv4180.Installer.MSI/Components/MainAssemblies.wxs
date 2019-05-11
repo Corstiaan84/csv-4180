@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright © Leonid Maliutin <mals@live.ru> 2019
+-->
+<?include ..\Product.wxi ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <ComponentGroup Id="MainAssemblies" Directory="INSTALLFOLDER">
+      <Component Id="DocInOffice.Csv4180" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="DocInOffice.Csv4180.dll" Name="DocInOffice.Csv4180.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="DocInOffice.Csv4180.FileExtension" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="DocInOffice.Csv4180.FileExtension.dll" Name="DocInOffice.Csv4180.FileExtension.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+        <!-- Converter -->
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Classes\CLSID\$(var.ConverterClassID)">
+          <RegistryValue Name="AppID" Value="$(var.ConverterClassID)" Type="string" Action="write" />
+          <RegistryKey Key="Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes" />
+          <RegistryKey Key="InprocServer32" >
+            <RegistryValue Value="mscoree.dll" Type="string" Action="write" />
+            <RegistryValue Name="ThreadingModel" Value="Both" Type="string" Action="write" />
+            <RegistryValue Name="Class" Value="$(var.ConverterClassName)" Type="string" Action="write" />
+            <RegistryValue Name="Assembly" Value="$(var.AssemblyIdentifier)" Type="string" Action="write" />
+            <RegistryValue Name="RuntimeVersion" Value="[NETRUNTIME]" Type="string" Action="write" />
+            <RegistryKey Key="$(var.CurrentAssemblyVersion)">
+              <RegistryValue Name="Class" Value="$(var.ConverterClassName)" Type="string" Action="write" />
+              <RegistryValue Name="Assembly" Value="$(var.AssemblyIdentifier)" Type="string" Action="write" />
+              <RegistryValue Name="RuntimeVersion" Value="[NETRUNTIME]" Type="string" Action="write" />
+            </RegistryKey>
+          </RegistryKey>
+        </RegistryKey>
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Classes\AppID\$(var.ConverterClassID)">
+          <RegistryValue Name="DllSurrogate" Value="" Type="string" Action="write" />
+        </RegistryKey>
+        <!-- ConverterPreferences -->
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Classes\CLSID\$(var.ConverterPreferencesClassID)">
+          <RegistryKey Key="Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes" />
+          <RegistryKey Key="InprocServer32">
+            <RegistryValue Value="mscoree.dll" Type="string" Action="write" />
+            <RegistryValue Name="ThreadingModel" Value="Both" Type="string" Action="write" />
+            <RegistryValue Name="Class" Value="$(var.ConverterPreferencesClassName)" Type="string" Action="write" />
+            <RegistryValue Name="Assembly" Value="$(var.AssemblyIdentifier)" Type="string" Action="write" />
+            <RegistryValue Name="RuntimeVersion" Value="[NETRUNTIME]" Type="string" Action="write" />
+            <RegistryKey Key="$(var.CurrentAssemblyVersion)">
+              <RegistryValue Name="Class" Value="$(var.ConverterPreferencesClassName)" Type="string" Action="write" />
+              <RegistryValue Name="Assembly" Value="$(var.AssemblyIdentifier)" Type="string" Action="write" />
+              <RegistryValue Name="RuntimeVersion" Value="[NETRUNTIME]" Type="string" Action="write" />
+            </RegistryKey>
+          </RegistryKey>
+        </RegistryKey>
+      </Component>
+      <Component Id="DocInOffice.MSOfficeExtension" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="DocInOffice.MSOfficeExtension.dll" Name="DocInOffice.MSOfficeExtension.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="DocInOffice.XlsxDelimitedTextConversion" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="DocInOffice.XlsxDelimitedTextConversion.dll" Name="DocInOffice.XlsxDelimitedTextConversion.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="Ionic.Zip" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="Ionic.Zip.dll" Name="Ionic.Zip.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="Ude" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="Ude.dll" Name="Ude.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="NetOffice" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="NetOffice.dll" Name="NetOffice.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="OfficeApi" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="OfficeApi.dll" Name="OfficeApi.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="ExcelApi" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="ExcelApi.dll" Name="ExcelApi.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+      <Component Id="VBIDEApi" Guid="*" Win64="$(var.IsOffice64)">
+        <File Id="VBIDEApi.dll" Name="VBIDEApi.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+</Wix>

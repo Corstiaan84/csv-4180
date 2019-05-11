@@ -44,23 +44,27 @@
     <DefineConstants>AppVersion=$(AppVersion);OfficeVersion=$(OfficeVersion);OfficeYear=$(OfficeYear);IsOffice64=$(IsOffice64);ProductUpgradeCode=$(ProductUpgradeCode);FilesFolderPath=$(FilesFolderPath)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\MainAssemblies.wxs" />
+    <Compile Include="Components\Rfc4180ExcelExtension.wxs" />
+    <Compile Include="Components\EventLog.wxs" />
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ru-ru.wxl" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assemblies.wxi" />
     <Content Include="csv-4180.ico" />
-    <Content Include="CsvFileExcelExtension.wxi" />
-    <Content Include="EventLogIntegration.wxi" />
     <Content Include="packages.config" />
+    <Content Include="Product.wxi" />
   </ItemGroup>
   <ItemGroup>
     <WixExtension Include="WixNetFxExtension">
       <HintPath>..\packages\WiX.3.11.1\tools\WixNetFxExtension.dll</HintPath>
       <Name>WixNetFxExtension</Name>
     </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
