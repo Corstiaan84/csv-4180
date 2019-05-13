@@ -5,7 +5,7 @@
 <?include ..\Product.wxi?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
-    <Component Id="EventLogIntegration" Guid="*" Directory="INSTALLFOLDER" Win64="$(var.IsOffice64)">
+    <Component Id="EventLogIntegration" Guid="*" Directory="INSTALLFOLDER">
       <RegistryKey Root="HKLM" Key="SYSTEM\CurrentControlSet\services\eventlog\Application\DocInOffice.Csv4180FileExtension">
         <RegistryValue Name="EventMessageFile" Type="string" Value="%windir%\Microsoft.NET\Framework\[NETRUNTIME]\EventLogMessages.dll" Action="write" />
       </RegistryKey>

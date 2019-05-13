@@ -7,7 +7,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>0d6f95ee-e686-4a19-894e-d60d5c12860c</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>CSV_4180_ru</OutputName>
+    <OutputName>CSV_4180</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -36,6 +36,7 @@
     <IntermediateOutputPath>obj\x64\Debug\</IntermediateOutputPath>
     <DefineConstants>Debug;</DefineConstants>
     <Cultures>ru-RU</Cultures>
+    <SuppressIces>ICE80</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -66,6 +67,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Csv4180.FileExtension\DocInOffice.Csv4180.FileExtension.csproj">
+      <Name>DocInOffice.Csv4180.FileExtension</Name>
+      <Project>{78eac634-2529-4145-b582-c602161f9960}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

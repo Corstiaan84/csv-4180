@@ -5,23 +5,15 @@
 <Include>
   <?ifdef Debug?>
   <?define AppVersion="1.0.21"?>
-  <?define IsOffice64="yes"?>
   <?define ProductUpgradeCode="8FCA08C9-3406-4AAB-8481-638CBDBCE918"?>
-  <?define FilesFolderPath="..\Csv4180.FileExtension\bin\Debug\"?>
   <?endif?>
 
   <!-- BEGIN Проверка входящий значений -->
   <?if $(var.AppVersion)=""?>
   <?error AppVersion has not been defined?>
   <?endif?>
-  <?if $(var.IsOffice64)=""?>
-  <?error IsOffice64 has not been defined?>
-  <?endif?>
   <?if $(var.ProductUpgradeCode)=""?>
   <?error ProductUpgradeCode has not been defined?>
-  <?endif?>
-  <?if $(var.FilesFolderPath)=""?>
-  <?error FilesFolderPath has not been defined?>
   <?endif?>
   <!-- END Проверка входящий значений -->
 

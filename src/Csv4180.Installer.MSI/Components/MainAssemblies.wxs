@@ -3,6 +3,7 @@
     Copyright © Leonid Maliutin <mals@live.ru> 2019
 -->
 <?include ..\Product.wxi ?>
+<?define FilesFolderPath="$(var.DocInOffice.Csv4180.FileExtension.TargetDir)"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
     <ComponentGroup Id="MainAssemblies" Directory="INSTALLFOLDER">
@@ -11,7 +12,6 @@
       </Component>
       <Component Id="DocInOffice.Csv4180.FileExtension" Guid="*">
         <File Id="DocInOffice.Csv4180.FileExtension.dll" Name="DocInOffice.Csv4180.FileExtension.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />
-        
       </Component>
       <Component Id="DocInOffice.MSOfficeExtension" Guid="*">
         <File Id="DocInOffice.MSOfficeExtension.dll" Name="DocInOffice.MSOfficeExtension.dll" Source="$(var.FilesFolderPath)" KeyPath="yes" Assembly=".net" />

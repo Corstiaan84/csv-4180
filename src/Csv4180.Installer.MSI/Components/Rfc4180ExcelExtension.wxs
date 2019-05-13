@@ -3,11 +3,17 @@
     Copyright © Leonid Maliutin <mals@live.ru> 2016
 -->
 <?include ..\Product.wxi?>
+<?if $(var.Platform)="x64"?>
+<?define SupportedWin64=yes;no ?>
+<?else?>
+<?define SupportedWin64=no ?>
+<?endif?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Fragment>
-    <ComponentGroup Id="Rfc4180ExcelExtension" Directory="INSTALLFOLDER">
-      <?foreach OfficeVersion in 12.0;14.0;15.0;16.0?>
-      <Component Id="Rfc4180ExcelExtension_$(var.OfficeVersion)" Guid="*" Win64="$(var.IsOffice64)">
+    <ComponentGroup Id="Rfc4180ExcelExtension">
+      <?foreach Win64 in $(var.SupportedWin64) ?>
+      <?foreach OfficeVersion in 12.0;14.0;15.0;16.0 ?>
+      <Component Id="Rfc4180ExcelExtension_$(var.OfficeVersion)_$(var.Win64)" Guid="*" Directory="INSTALLFOLDER" Win64="$(var.Win64)">
         <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Office\$(var.OfficeVersion)\Excel\Text Converters">
           <RegistryKey Key="OOXML Converters\Export">
             <RegistryKey Key="CSV [\[]RFC 4180[\]] 1">
@@ -43,6 +49,7 @@
           </RegistryKey>
         </RegistryKey>
       </Component>
+      <?endforeach?>
       <?endforeach?>
     </ComponentGroup>
   </Fragment>

@@ -36,16 +36,7 @@
     
     <MediaTemplate EmbedCab="yes" />
 
-    <?if $(var.IsOffice64)="no"?>
-      <?if $(var.OfficeVersion) = "12.0" ?>
-        <WixVariable Id="HostDispalyName" Value="Microsoft $(var.HostName) со 2-ым (или следующим) пакетом обновлений" />
-      <?else?>
-        <WixVariable Id="HostDispalyName" Value="Microsoft $(var.HostName) (32-bit)" />
-      <?endif?>
-    <?elseif $(var.IsOffice64)="yes"?>
-      <WixVariable Id="HostDispalyName" Value="Microsoft $(var.HostName) (64-bit)" />
-    <?endif?>
-
+    <WixVariable Id="HostDispalyName" Value="Microsoft $(var.HostName)" />
     <WixVariable Id="ProductDisplayName" Value="$(var.ProductName) ($(var.HostName))" />
 
     <!-- Свойства "Add or Remove Programs Entries". https://www.firegiant.com/wix/tutorial/com-expression-syntax-miscellanea/add-or-remove-programs-entries/-->
@@ -97,14 +88,14 @@
 
   <Fragment>
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <?if $(var.IsOffice64)="no"?>
-      <Directory Id="ProgramFilesFolder">
+      <?if $(var.Platform)="x64"?>
+      <Directory Id="ProgramFiles64Folder">
         <Directory Id="DocInOffice_Folder" Name="DocInOffice">
           <Directory Id="INSTALLFOLDER" Name="$(var.ProductName)" />
         </Directory>
       </Directory>
-      <?elseif $(var.IsOffice64)="yes"?>
-      <Directory Id="ProgramFiles64Folder">
+      <?else?>
+      <Directory Id="ProgramFilesFolder">
         <Directory Id="DocInOffice_Folder" Name="DocInOffice">
           <Directory Id="INSTALLFOLDER" Name="$(var.ProductName)" />
         </Directory>
