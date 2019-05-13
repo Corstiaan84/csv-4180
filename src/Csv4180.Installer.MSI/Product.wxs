@@ -69,24 +69,11 @@
     <Condition Message="!(loc.Only32BitMessage)"><![CDATA[NOT VersionNT64]]></Condition>
     <?endif ?>
 
-    <Property Id="HOSTPATH">
-      <RegistrySearch Id="RegSearch_HOSTEXE" Root="HKLM" Key="SOFTWARE\Microsoft\Office\$(var.OfficeVersion)\Excel\InstallRoot" Name="Path" Type="directory" Win64="$(var.IsOffice64)">
-        <?if $(var.OfficeVersion) = "12.0" ?>
-        <FileSearch Name="EXCEL.EXE" MinVersion ="12.0.6424.1000" />
-        <?else?>
-        <FileSearch Name="EXCEL.EXE" />
-        <?endif?>
-      </RegistrySearch>
-    </Property>
-
     <!-- Подключаем функционал для проверки .NET 4.0 и выше.-->
     <PropertyRef Id="NETFRAMEWORK40FULL" />
 
-    <!-- Определяем наличиие Microsoft .NET Framework версии 3.5 SP1. http://wixtoolset.org/documentation/manual/v3/howtos/redistributables_and_install_checks/check_for_dotnet.html -->
+    <!-- Определяем наличиие Microsoft .NET Framework версии 4.0. http://wixtoolset.org/documentation/manual/v3/howtos/redistributables_and_install_checks/check_for_dotnet.html -->
     <Condition Message="!(loc.NetConditionMessage)">Installed OR NETFRAMEWORK40FULL</Condition>
-
-    <!-- Определяем, что Host установлен. -->
-    <Condition Message="!(loc.HostConditionMessage)">Installed OR HOSTPATH</Condition>
 
     <CustomAction Id='CurrentVersionMessage' Error='!(loc.CurrentVersionMessage)' />
     <CustomAction Id='NextVersionMessage' Error='!(loc.NextVersionMessage)' />
@@ -102,6 +89,7 @@
 
     <Feature Id="ProductFeature" Title="Csv4180_Installer" Level="1">
       <ComponentGroupRef Id="MainAssemblies"/>
+      <ComponentGroupRef Id="ComRegistration"/>
       <ComponentGroupRef Id="Rfc4180ExcelExtension"/>
       <ComponentRef Id="EventLogIntegration"/>
     </Feature>

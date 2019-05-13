@@ -6,7 +6,8 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Fragment>
     <ComponentGroup Id="Rfc4180ExcelExtension" Directory="INSTALLFOLDER">
-      <Component Id="Rfc4180ExcelExtension" Guid="*" Win64="$(var.IsOffice64)">
+      <?foreach OfficeVersion in 12.0;14.0;15.0;16.0?>
+      <Component Id="Rfc4180ExcelExtension_$(var.OfficeVersion)" Guid="*" Win64="$(var.IsOffice64)">
         <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Office\$(var.OfficeVersion)\Excel\Text Converters">
           <RegistryKey Key="OOXML Converters\Export">
             <RegistryKey Key="CSV [\[]RFC 4180[\]] 1">
@@ -42,6 +43,7 @@
           </RegistryKey>
         </RegistryKey>
       </Component>
+      <?endforeach?>
     </ComponentGroup>
   </Fragment>
 </Wix>

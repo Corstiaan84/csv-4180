@@ -44,6 +44,7 @@
     <DefineConstants>AppVersion=$(AppVersion);OfficeVersion=$(OfficeVersion);OfficeYear=$(OfficeYear);IsOffice64=$(IsOffice64);ProductUpgradeCode=$(ProductUpgradeCode);FilesFolderPath=$(FilesFolderPath)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\ComRegistration.wxs" />
     <Compile Include="Components\MainAssemblies.wxs" />
     <Compile Include="Components\Rfc4180ExcelExtension.wxs" />
     <Compile Include="Components\EventLog.wxs" />

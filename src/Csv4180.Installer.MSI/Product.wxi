@@ -6,10 +6,8 @@
   <?ifdef Debug?>
   <?define AppVersion="1.0.21"?>
   <?define IsOffice64="yes"?>
-  <?define OfficeVersion="14.0"?>
-  <?define OfficeYear="2010"?>
   <?define ProductUpgradeCode="8FCA08C9-3406-4AAB-8481-638CBDBCE918"?>
-  <?define FilesFolderPath="..\Csv4180.FileExtension\bin\x64\Debug\"?>
+  <?define FilesFolderPath="..\Csv4180.FileExtension\bin\Debug\"?>
   <?endif?>
 
   <!-- BEGIN Проверка входящий значений -->
@@ -18,12 +16,6 @@
   <?endif?>
   <?if $(var.IsOffice64)=""?>
   <?error IsOffice64 has not been defined?>
-  <?endif?>
-  <?if $(var.OfficeVersion)=""?>
-  <?error OfficeVersion has not been defined?>
-  <?endif?>
-  <?if $(var.OfficeYear)=""?>
-  <?error OfficeYear has not been defined?>
   <?endif?>
   <?if $(var.ProductUpgradeCode)=""?>
   <?error ProductUpgradeCode has not been defined?>
@@ -34,21 +26,10 @@
   <!-- END Проверка входящий значений -->
 
   <?define ProductName="CSV 4180"?>
-  <?define HostName="Excel $(var.OfficeYear)"?>
+  <?define HostName="Excel"?>
 
-  <?if $(var.OfficeVersion)="12.0"?>
-  <?define ConverterClassID="{617F3546-1AA8-4BE0-98C7-057EA88F72F4}"?>
-  <?define ConverterPreferencesClassID="{052F29BB-25C5-4659-9A85-7D4BAEB36916}"?>
-  <?elseif $(var.OfficeVersion)="14.0"?>
-  <?define ConverterClassID="{7A3833CD-BA81-4EF1-8A4B-63364677550C}"?>
-  <?define ConverterPreferencesClassID="{F77824CC-EA5C-4878-9F80-FB77BA03DEC9}"?>
-  <?elseif $(var.OfficeVersion)="15.0"?>
-  <?define ConverterClassID="{97E9B8F9-1ADB-479A-88E2-7FFB8063C045}"?>
-  <?define ConverterPreferencesClassID="{B6A7E1CC-3BAD-4E7D-92AD-2DFC7336BF29}"?>
-  <?elseif $(var.OfficeVersion)="16.0"?>
-  <?define ConverterClassID="{986C126E-24EF-4C3C-9E27-D928CC19972C}"?>
-  <?define ConverterPreferencesClassID="{F48CA6BF-435E-462C-B041-FE15A693E306}"?>
-  <?endif?>
+  <?define ConverterClassID="{AE9845CC-E17B-46E4-9D7B-6F94CF5900D9}"?>
+  <?define ConverterPreferencesClassID="{48CD5D68-D510-498F-9F1E-076AC6076A34}"?>
 
   <?define CurrentAssemblyVersion="$(var.AppVersion).0"?>
   <?define AssemblyIdentifier="DocInOffice.Csv4180.FileExtension, Version=$(var.CurrentAssemblyVersion), Culture=neutral, PublicKeyToken=b2ab273a354b85f8"?>

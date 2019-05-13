@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright © Leonid Maliutin <mals@live.ru> 2019
+-->
+<?include ..\Product.wxi ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <ComponentGroup Id="ComRegistration" Directory="INSTALLFOLDER">
+      <Component Id="ComRegistration">
+        <!-- Converter -->
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Classes\CLSID\$(var.ConverterClassID)">
+          <RegistryValue Name="AppID" Value="$(var.ConverterClassID)" Type="string" Action="write" />
+          <RegistryKey Key="Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes" />
+          <RegistryKey Key="InprocServer32" >
+            <RegistryValue Value="mscoree.dll" Type="string" Action="write" />
+            <RegistryValue Name="ThreadingModel" Value="Both" Type="string" Action="write" />
+            <RegistryValue Name="Class" Value="$(var.ConverterClassName)" Type="string" Action="write" />
+            <RegistryValue Name="Assembly" Value="$(var.AssemblyIdentifier)" Type="string" Action="write" />
+            <RegistryValue Name="RuntimeVersion" Value="[NETRUNTIME]" Type="string" Action="write" />
+            <RegistryKey Key="$(var.CurrentAssemblyVersion)">
+              <RegistryValue Name="Class" Value="$(var.ConverterClassName)" Type="string" Action="write" />
+              <RegistryValue Name="Assembly" Value="$(var.AssemblyIdentifier)" Type="string" Action="write" />
+              <RegistryValue Name="RuntimeVersion" Value="[NETRUNTIME]" Type="string" Action="write" />
+            </RegistryKey>
+          </RegistryKey>
+        </RegistryKey>
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Classes\AppID\$(var.ConverterClassID)">
+          <RegistryValue Name="DllSurrogate" Value="" Type="string" Action="write" />
+        </RegistryKey>
+        <!-- ConverterPreferences -->
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Classes\CLSID\$(var.ConverterPreferencesClassID)">
+          <RegistryKey Key="Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes" />
+          <RegistryKey Key="InprocServer32">
+            <RegistryValue Value="mscoree.dll" Type="string" Action="write" />
+            <RegistryValue Name="ThreadingModel" Value="Both" Type="string" Action="write" />
+            <RegistryValue Name="Class" Value="$(var.ConverterPreferencesClassName)" Type="string" Action="write" />
+            <RegistryValue Name="Assembly" Value="$(var.AssemblyIdentifier)" Type="string" Action="write" />
+            <RegistryValue Name="RuntimeVersion" Value="[NETRUNTIME]" Type="string" Action="write" />
+            <RegistryKey Key="$(var.CurrentAssemblyVersion)">
+              <RegistryValue Name="Class" Value="$(var.ConverterPreferencesClassName)" Type="string" Action="write" />
+              <RegistryValue Name="Assembly" Value="$(var.AssemblyIdentifier)" Type="string" Action="write" />
+              <RegistryValue Name="RuntimeVersion" Value="[NETRUNTIME]" Type="string" Action="write" />
+            </RegistryKey>
+          </RegistryKey>
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

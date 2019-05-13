@@ -10,6 +10,5 @@
   <String Id="CurrentVersionMessage">Текущая версия программы !(wix.ProductDisplayName) уже установлена.</String>
   <String Id="NextVersionMessage">Следующая версия программы !(wix.ProductDisplayName) уже установлена.</String>
   <String Id="PreviousVersionMessage">Предыдущая версия программы !(wix.ProductDisplayName) уже установлена.</String>
-  <String Id="HostConditionMessage">Требуется чтобы была установлена программа !(wix.HostDispalyName).</String>
   <String Id="NetConditionMessage">Требуется чтобы был установлен .NET Framework версии 4.0 или выше.</String>
 </WixLocalization>
