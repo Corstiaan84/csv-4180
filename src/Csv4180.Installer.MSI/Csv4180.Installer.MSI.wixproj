@@ -23,7 +23,7 @@
     <OutputPath>bin\x86\Debug\</OutputPath>
     <IntermediateOutputPath>obj\x86\Debug\</IntermediateOutputPath>
     <DefineConstants>Debug;</DefineConstants>
-    <Cultures>ru-RU</Cultures>
+    <Cultures>en-US</Cultures>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -35,7 +35,7 @@
     <OutputPath>bin\x64\Debug\</OutputPath>
     <IntermediateOutputPath>obj\x64\Debug\</IntermediateOutputPath>
     <DefineConstants>Debug;</DefineConstants>
-    <Cultures>ru-RU</Cultures>
+    <Cultures>en-US</Cultures>
     <SuppressIces>ICE80</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
@@ -52,7 +52,7 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ru-ru.wxl" />
+    <EmbeddedResource Include="en-us.wxl" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="csv-4180.ico" />

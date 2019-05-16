@@ -3,20 +3,9 @@
     Copyright © Leonid Maliutin <mals@live.ru> 2019
 -->
 <Include>
-  <?ifdef Debug?>
-  <?define AppVersion="1.0.21"?>
+  <?define AppVersion="!(bind.FileVersion.$(var.DocInOffice.Csv4180.FileExtension.TargetFileName))"?>
+
   <?define ProductUpgradeCode="8FCA08C9-3406-4AAB-8481-638CBDBCE918"?>
-  <?endif?>
-
-  <!-- BEGIN Проверка входящий значений -->
-  <?if $(var.AppVersion)=""?>
-  <?error AppVersion has not been defined?>
-  <?endif?>
-  <?if $(var.ProductUpgradeCode)=""?>
-  <?error ProductUpgradeCode has not been defined?>
-  <?endif?>
-  <!-- END Проверка входящий значений -->
-
   <?define ProductName="CSV 4180"?>
   <?define HostName="Excel"?>
 
