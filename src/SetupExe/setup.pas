@@ -125,61 +125,6 @@ type
 	TOfficeProgram = (opWord, opExcel);
 	TOfficeBit = (obNone, ob32, ob64);
 
-function CheckOfficeInstance(OfficeProgram: TOfficeProgram; OfficeVersion: string; var OfficeBit: TOfficeBit): Boolean;
-var
-  FileName: string;
-  FolderPath: string;
-  FilePath: string;
-  FileVersion: string;
-begin
-  case OfficeProgram of
-	opWord: FileName := 'WINWORD.EXE';
-    opExcel: FileName := 'EXCEL.EXE';
-    else RaiseException('Unknown office instance');
-  end;
-	
-  if RegValueExists(HKLM32, 'SOFTWARE\Microsoft\Office\' + OfficeVersion + '\Word\InstallRoot', 'Path') then
-  begin
-    RegQueryStringValue(HKLM32, 'SOFTWARE\Microsoft\Office\' + OfficeVersion + '\Word\InstallRoot', 'Path', FolderPath);
-    FilePath := AddBackslash(FolderPath) + FileName;
-    if FileExists(FilePath) then
-    begin
-      if OfficeVersion = '12.0' then
-      begin
-        if GetVersionNumbersString(FilePath, FileVersion) then
-        begin
-          if CompareVersion(FileVersion, '12.0.6424.1000') >= 0 then
-            OfficeBit := ob32;
-        end;
-      end
-      else
-      begin
-        OfficeBit := ob32;
-      end;
-    end;
-  end
-  else if IsWin64() and RegValueExists(HKLM64, 'SOFTWARE\Microsoft\Office\' + OfficeVersion + '\Word\InstallRoot', 'Path') then
-  begin
-    RegQueryStringValue(HKLM64, 'SOFTWARE\Microsoft\Office\' + OfficeVersion + '\Word\InstallRoot', 'Path', FolderPath);
-    FilePath := AddBackslash(FolderPath) + FileName;
-    if FileExists(FilePath) then
-      OfficeBit := ob64;
-  end;
-
-  if OfficeBit = ob32 then
-    Log('"' + FilePath + '", x86')
-  else if OfficeBit = ob64 then
-    Log('"' + FilePath + '," x64');
-
-  if OfficeBit = obNone then
-  begin
-    Result := False;
-    Exit;
-  end;
-
-  Result := true;
-end;
-
 function MsiEnumRelatedProducts(lpUpgradeCode: string; dwReserved: DWORD; iProductIndex: DWORD; lpProductBuf: string): UINT;
   external 'MsiEnumRelatedProductsW@msi.dll stdcall';
 

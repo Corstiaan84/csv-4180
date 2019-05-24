@@ -36,13 +36,16 @@
     <IntermediateOutputPath>obj\x64\Debug\</IntermediateOutputPath>
     <DefineConstants>Debug;</DefineConstants>
     <Cultures>en-US</Cultures>
-    <SuppressIces>ICE80</SuppressIces>
+    <SuppressIces>
+    </SuppressIces>
+    <SuppressValidation>True</SuppressValidation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <OutputPath>bin\x64\Release\</OutputPath>
     <IntermediateOutputPath>obj\x64\Release\</IntermediateOutputPath>
-    <Cultures>ru-RU</Cultures>
+    <Cultures>en-US</Cultures>
     <DefineConstants>AppVersion=$(AppVersion);OfficeVersion=$(OfficeVersion);OfficeYear=$(OfficeYear);IsOffice64=$(IsOffice64);ProductUpgradeCode=$(ProductUpgradeCode);FilesFolderPath=$(FilesFolderPath)</DefineConstants>
+    <SuppressValidation>True</SuppressValidation>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\ComRegistration.wxs" />

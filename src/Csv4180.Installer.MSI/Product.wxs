@@ -6,16 +6,14 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Product Id="*"
            Name="$(var.ProductName) v$(var.AppVersion) ($(var.HostName))"
-           Language="1049"
-           Codepage="1251"
+           Language="1033"
            Version="$(var.AppVersion)"
            Manufacturer="Leonid Maliutin"
            UpgradeCode="$(var.ProductUpgradeCode)"
   >
     <Package Id="*"
              Compressed="yes"
-             Languages="1049"
-             SummaryCodepage="1251"
+             Languages="1033"
              InstallScope="perMachine"
              InstallPrivileges="elevated"
              Manufacturer="Leonid Maliutin"

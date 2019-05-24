@@ -90,7 +90,6 @@ type
 
 var
   ProcessStatus: TProcessStatus;
-  OfficeBit: TOfficeBit;
   HasFramework: Boolean;
   AnotherVersion: TAnotherVersion;
   PreviousProgramId: String;
@@ -165,13 +164,6 @@ begin
   FrameworkMsgPage := CreateOutputMsgPage(UpdateMsgPage.Id, CustomMessage('InstallInfo'), CustomMessage('InternetRequiredCaption'), CustomMessage('InternetRequiredMessage'));
   
   OfficeProgram := opExcel;
-
-  CheckOfficeInstance(OfficeProgram, '{#OfficeVersion}', OfficeBit);
-  if OfficeBit = obNone then
-  begin
-	ProcessStatus := psError;
-	exit;
-  end;
 
   HasFramework := IsDotNetDetected('v4\Full', 0);
 end;
