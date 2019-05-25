@@ -122,8 +122,6 @@ end;
 
 type
 	TAnotherVersion = (avNone, avCurrent, avNext, avPrevious);
-	TOfficeProgram = (opWord, opExcel);
-	TOfficeBit = (obNone, ob32, ob64);
 
 function MsiEnumRelatedProducts(lpUpgradeCode: string; dwReserved: DWORD; iProductIndex: DWORD; lpProductBuf: string): UINT;
   external 'MsiEnumRelatedProductsW@msi.dll stdcall';
@@ -181,16 +179,6 @@ begin
   PreviousProductVersion := VersionBuf;
   Location := LocationBuf;
   Result := true;
-end;
-
-procedure ShowThanksPage(AppName, AppVersion, Host, Action: string);
-var                                                          
-  Url: String;
-  ErrorCode: Integer;
-begin
-  Url := 'https://www.docinoffice.ru/notification/thank-you-for-using/?product=' + AppName + '&version=' + AppVersion + '&host=' + Host + '&action=' + Action;
-
-  ShellExecAsOriginalUser('open', Url, '', '', SW_SHOWMINNOACTIVE, ewNoWait, ErrorCode); // SW_SHOW, SW_SHOWNORMAL, SW_SHOWMAXIMIZED, SW_SHOWMINIMIZED, SW_SHOWMINNOACTIVE, SW_HIDE
 end;
 
 procedure UninstallProduct(ProductId: string; var ResultCode: integer);

@@ -28,8 +28,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
     <IntermediateOutputPath>obj\x86\Release\</IntermediateOutputPath>
-    <Cultures>ru-RU</Cultures>
+    <Cultures>en-US</Cultures>
     <DefineConstants>AppVersion=$(AppVersion);OfficeVersion=$(OfficeVersion);OfficeYear=$(OfficeYear);IsOffice64=$(IsOffice64);ProductUpgradeCode=$(ProductUpgradeCode);FilesFolderPath=$(FilesFolderPath)</DefineConstants>
+    <SuppressValidation>True</SuppressValidation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <OutputPath>bin\x64\Debug\</OutputPath>

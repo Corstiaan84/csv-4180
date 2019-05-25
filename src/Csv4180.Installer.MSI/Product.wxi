@@ -12,7 +12,7 @@
   <?define ConverterClassID="{AE9845CC-E17B-46E4-9D7B-6F94CF5900D9}"?>
   <?define ConverterPreferencesClassID="{48CD5D68-D510-498F-9F1E-076AC6076A34}"?>
 
-  <?define CurrentAssemblyVersion="$(var.AppVersion).0"?>
+  <?define CurrentAssemblyVersion="$(var.AppVersion)"?>
   <?define AssemblyIdentifier="DocInOffice.Csv4180.FileExtension, Version=$(var.CurrentAssemblyVersion), Culture=neutral, PublicKeyToken=b2ab273a354b85f8"?>
   <?define ConverterClassName="DocInOffice.Csv4180.FileExtension.Converter"?>
   <?define ConverterPreferencesClassName="DocInOffice.Csv4180.FileExtension.ConverterPreferences"?>
