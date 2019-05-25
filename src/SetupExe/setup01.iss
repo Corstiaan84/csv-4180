@@ -1,8 +1,10 @@
+; Copyright © Leonid Maliutin <mals@live.ru> 2019
+
 #define Configuration "Debug"
 #define AppName "CSV 4180"
 #define AppVersion "1.0.21"
 
-#define LicensePath "..\Licences\licence (CSV 4180).rtf"
+#define LicensePath "..\..\LICENSE"
 #define NetSetupPath "..\Libraries\dotNetFx40_Full_setup.exe"
 #define OutputDir "..\Csv4180.Installer.EXE\bin\Release"
 #define OutputBaseFilename "CSV_4180_v" + AppVersion
