@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="15.0"
+         DefaultTargets="Build">
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <AppVersion Condition=" '$(AppVersion)' == ''">1.0.21</AppVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <IssIdentifier Include="Configuration">
+      <Value>$(Configuration)</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="AppVersion">
+      <Value>$(AppVersion)</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="Msi32Path">
+      <Value>..\Csv4180.Installer.MSI\bin\x86\Release\en-US\CSV_4180.msi</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="Msi64Path">
+      <Value>..\Csv4180.Installer.MSI\bin\x64\Release\en-US\CSV_4180.msi</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="LicensePath">
+      <Value>..\..\LICENSE</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="NetSetupPath">
+      <Value>..\Libraries\dotNetFx40_Full_setup.exe</Value>
+    </IssIdentifier>
+    <IssIdentifier Include="UpgradeCode">
+      <Value>{8FCA08C9-3406-4AAB-8481-638CBDBCE918}</Value>
+    </IssIdentifier>
+    
+    <IssIdentifier Include="OutputDir">
+      <Value>..\Csv4180.Installer.EXE\bin\Release\</Value>
+    </IssIdentifier>
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <IssFilePath>setup.iss</IssFilePath>
+    <IsccExePath>..\Libraries\Inno Setup 5\ISCC.exe</IsccExePath>
+  </PropertyGroup>
+
+  <Target Name="AssertProperties" BeforeTargets="BuildSetupExe">
+    <Error Condition=" '$(Configuration)' == '' " Text="The Configuration property is not set." />
+    <Error Condition=" '$(AppVersion)' == '' " Text="The AppVersion property is not set." />
+  </Target>
+  
+  <Target Name="BuildSetupExe">
+    <Exec Command='"$(IsccExePath)" @(IssIdentifier -> &apos;/D%(Identity)="%(Value)"&apos;, &apos; &apos;) "$(IssFilePath)"' />
+  </Target>
+
+  <PropertyGroup>
+    <BuildDependsOn>BuildSetupExe</BuildDependsOn>
+    <!--<CleanDependsOn>CleanDotNetInstallerCache</CleanDependsOn>-->
+  </PropertyGroup>
+
+  <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
+  <!--<Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />-->
+</Project>

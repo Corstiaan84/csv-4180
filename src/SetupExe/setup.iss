@@ -1,16 +1,46 @@
 ; Copyright © Leonid Maliutin <mals@live.ru> 2019
+#ifndef Configuration
+  //#define Configuration "Debug"
+#endif
 
-#define Configuration "Debug"
+#if Configuration == "Debug"
+// #define AppVersion "1.0.21"
+// #define Msi32Path "..\Csv4180.Installer.MSI\bin\x86\Release\en-US\CSV_4180.msi"
+// #define Msi64Path "..\Csv4180.Installer.MSI\bin\x64\Release\en-US\CSV_4180.msi"
+// #define LicensePath "..\..\LICENSE"
+// #define NetSetupPath "..\Libraries\dotNetFx40_Full_setup.exe"
+// #define UpgradeCode "{8FCA08C9-3406-4AAB-8481-638CBDBCE918}"
+// #define OutputDir "..\Csv4180.Installer.EXE\bin\Release"
+#endif
+
+#ifndef Configuration 
+#error 'Configuration' property is not defined.
+#endif
+#ifndef AppVersion 
+#error Undeclared identifier: 'AppVersion'
+#endif
+#ifndef Msi32Path
+#error Undeclared identifier: 'Msi32Path'
+#endif
+#ifndef Msi64Path
+#error Undeclared identifier: 'Msi64Path'
+#endif
+#ifndef LicensePath
+#error Undeclared identifier: 'LicensePath'
+#endif
+#ifndef NetSetupPath
+#error Undeclared identifier: 'NetSetupPath'
+#endif
+#ifndef UpgradeCode
+#error Undeclared identifier: 'UpgradeCode'
+#endif
+
+#ifndef OutputDir
+#error Undeclared identifier: 'OutputDir'
+#endif
+
 #define AppName "CSV 4180"
-#define AppVersion "1.0.21"
 
-#define LicensePath "..\..\LICENSE"
-#define NetSetupPath "..\Libraries\dotNetFx40_Full_setup.exe"
-#define UpgradeCode "{8FCA08C9-3406-4AAB-8481-638CBDBCE918}"
-#define Msi32Path "..\Csv4180.Installer.MSI\bin\x86\Release\en-US\CSV_4180.msi"
-#define Msi64Path "..\Csv4180.Installer.MSI\bin\x64\Release\en-US\CSV_4180.msi"
-
-#define OutputDir "..\Csv4180.Installer.EXE\bin\Release"
 #define OutputBaseFilename "CSV_4180_v" + AppVersion
 
 #define appPublisher "Leonid Maliutin"
@@ -284,7 +314,7 @@ begin
     else if ResultCode = ERROR_SUCCESS_REBOOT_REQUIRED then
       ProcessStatus := psProgramInstallationRebootRequired
     else
-      aiseException(CustomMessage('AddInInstallationError'));
+      RaiseException(CustomMessage('AddInInstallationError'));
   except
       ShowExceptionMessage();
       ProcessStatus := psError;
