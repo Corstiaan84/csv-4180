@@ -3,6 +3,10 @@
   //#define Configuration "Debug"
 #endif
 
+#ifndef Configuration 
+#error 'Configuration' property is not defined.
+#endif
+
 #if Configuration == "Debug"
 // #define AppVersion "1.0.21"
 // #define Msi32Path "..\Csv4180.Installer.MSI\bin\x86\Release\en-US\CSV_4180.msi"
@@ -13,9 +17,6 @@
 // #define OutputDir "..\Csv4180.Installer.EXE\bin\Release"
 #endif
 
-#ifndef Configuration 
-#error 'Configuration' property is not defined.
-#endif
 #ifndef AppVersion 
 #error Undeclared identifier: 'AppVersion'
 #endif

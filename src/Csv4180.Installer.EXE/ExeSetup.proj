@@ -5,6 +5,8 @@
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <AppVersion Condition=" '$(AppVersion)' == ''">1.0.21</AppVersion>
+    <Msi32Path>..\Csv4180.Installer.MSI\bin\x86\Release\en-US\CSV_4180.msi</Msi32Path>
+    <Msi64Path>..\Csv4180.Installer.MSI\bin\x64\Release\en-US\CSV_4180.msi</Msi64Path>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,10 +17,10 @@
       <Value>$(AppVersion)</Value>
     </IssIdentifier>
     <IssIdentifier Include="Msi32Path">
-      <Value>..\Csv4180.Installer.MSI\bin\x86\Release\en-US\CSV_4180.msi</Value>
+      <Value>$(Msi32Path)</Value>
     </IssIdentifier>
     <IssIdentifier Include="Msi64Path">
-      <Value>..\Csv4180.Installer.MSI\bin\x64\Release\en-US\CSV_4180.msi</Value>
+      <Value>$(Msi64Path)</Value>
     </IssIdentifier>
     <IssIdentifier Include="LicensePath">
       <Value>..\..\LICENSE</Value>
@@ -31,7 +33,7 @@
     </IssIdentifier>
     
     <IssIdentifier Include="OutputDir">
-      <Value>..\Csv4180.Installer.EXE\bin\Release\</Value>
+      <Value>.\bin\Release\</Value>
     </IssIdentifier>
   </ItemGroup>
   
@@ -40,12 +42,14 @@
     <IsccExePath>..\Libraries\Inno Setup 5\ISCC.exe</IsccExePath>
   </PropertyGroup>
 
-  <Target Name="AssertProperties" BeforeTargets="BuildSetupExe">
-    <Error Condition=" '$(Configuration)' == '' " Text="The Configuration property is not set." />
-    <Error Condition=" '$(AppVersion)' == '' " Text="The AppVersion property is not set." />
+  <Target Name="AssertProperties">
+    <Error Condition=" '$(Configuration)' == '' " Text="The Configuration property is not defined." />
+    <Error Condition=" '$(AppVersion)' == '' " Text="The AppVersion property is not defined." />
+    <Error Condition=" '$(Msi32Path)' == '' " Text="The Msi32Path property is not defined." />
+    <Error Condition=" '$(Msi64Path)' == '' " Text="The Msi64Path property is not defined." />
   </Target>
   
-  <Target Name="BuildSetupExe">
+  <Target Name="BuildSetupExe" DependsOnTargets="AssertProperties">
     <Exec Command='"$(IsccExePath)" @(IssIdentifier -> &apos;/D%(Identity)="%(Value)"&apos;, &apos; &apos;) "$(IssFilePath)"' />
   </Target>
 
