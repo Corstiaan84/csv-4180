@@ -3,7 +3,6 @@
     Copyright © Leonid Maliutin <mals@live.ru> 2019
 -->
 <?include ..\Product.wxi ?>
-<?define FilesFolderPath="$(var.DocInOffice.Csv4180.FileExtension.TargetDir)"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
     <ComponentGroup Id="MainAssemblies" Directory="INSTALLFOLDER">

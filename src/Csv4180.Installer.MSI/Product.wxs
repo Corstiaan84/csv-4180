@@ -39,10 +39,10 @@
 
     <!-- Свойства "Add or Remove Programs Entries". https://www.firegiant.com/wix/tutorial/com-expression-syntax-miscellanea/add-or-remove-programs-entries/-->
     <Property Id='ARPCOMMENTS'>!(loc.PackageDescription)</Property>
-    <Property Id='ARPCONTACT'>support@docinoffice.ru</Property>
-    <Property Id='ARPHELPLINK'>http://www.docinoffice.ru/csv-4180</Property>
-    <Property Id='ARPURLINFOABOUT'>http://www.docinoffice.ru/contacts</Property>
-    <!--<Property Id='ARPURLUPDATEINFO'>https://twitter.com/docinwords</Property>-->
+    <!--<Property Id='ARPCONTACT'></Property>-->
+    <Property Id='ARPHELPLINK'>https://github.com/maliutin/csv-4180</Property>
+    <!--<Property Id='ARPURLINFOABOUT'></Property>-->
+    <!--<Property Id='ARPURLUPDATEINFO'></Property>-->
     <!--<Property Id='ARPHELPTELEPHONE'>URL for technical support</Property>-->
     <!--<Property Id='ARPREADME'>path</Property>-->
     <!--<Property Id='ARPSIZE'>app size in kilobytes</Property>-->

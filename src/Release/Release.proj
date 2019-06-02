@@ -7,6 +7,8 @@
 
   <PropertyGroup>
     <Configuration>Release</Configuration>
+    <ProductUpgradeCode>{1A21A4B7-0174-459B-BEAC-F0A32652F515}</ProductUpgradeCode>
+    <FilesFolderPath>..\Csv4180.FileExtension\bin\$(Configuration)\</FilesFolderPath>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -51,6 +53,9 @@
     </PropertyGroup>
     <Message Importance="high" Text="AppVersion: $(AppVersion)" />
   </Target>
+  <Target Name="RebuildMsi">
+    <MSBuild Projects="..\Csv4180.Installer.MSI\Csv4180.Installer.MSI.wixproj" Targets="Rebuild" Properties='Configuration=$(Configuration);Platform=%(MsiFilePath.Platform);AppVersion=$(AppVersion);ProductUpgradeCode=$(ProductUpgradeCode);FilesFolderPath=$(FilesFolderPath)' />
+  </Target>
   <Target Name="CopyMsiFiles">
     <ItemGroup>
       <ProcessedMsiFile Include="@(MsiFilePath)">
@@ -81,7 +86,7 @@
     <ItemGroup>
       <SetupFilePath Include="..\Csv4180.Installer.EXE\bin\Release\CSV_4180_v$(AppVersion).exe">
         <ProcessedFilePath>$(IntermediateOutputPath)CSV_4180_v$(AppVersion).exe</ProcessedFilePath>
-        <OutputFilePath>$([System.IO.Path]::Combine('$(OutputPath)', 'CSV_4180_v$(AppVersion).exe'))</OutputFilePath>
+        <OutputFilePath>$([System.IO.Path]::Combine('$(OutputPath)', '$(Configuration)', 'CSV_4180_v$(AppVersion).exe'))</OutputFilePath>
       </SetupFilePath>
     </ItemGroup>
     <Copy SourceFiles="%(SetupFilePath.Identity)" DestinationFiles="%(ProcessedFilePath)" OverwriteReadOnlyFiles="true" />
@@ -96,7 +101,7 @@
     <Copy SourceFiles="%(SetupFilePath.ProcessedFilePath)" DestinationFiles="%(OutputFilePath)" OverwriteReadOnlyFiles="true" />
   </Target>
   <PropertyGroup>
-    <BuildDependsOn>RebuildSolution;CopyMsiFiles;SignMsiFiles;CreateExeSetup;CopySetupFile;SignSetupFile;CopyReadySetupFile</BuildDependsOn>
+    <BuildDependsOn>RebuildSolution;RebuildMsi;CopyMsiFiles;SignMsiFiles;CreateExeSetup;CopySetupFile;SignSetupFile;CopyReadySetupFile</BuildDependsOn>
     <!--<CleanDependsOn>CleanDotNetInstallerCache</CleanDependsOn>-->
   </PropertyGroup>
 

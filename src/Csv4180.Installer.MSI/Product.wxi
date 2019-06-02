@@ -3,16 +3,33 @@
     Copyright © Leonid Maliutin <mals@live.ru> 2019
 -->
 <Include>
-  <?define AppVersion="!(bind.FileVersion.$(var.DocInOffice.Csv4180.FileExtension.TargetFileName))"?>
+  <?ifndef Configuration ?>
+  <?error "AppVersion is not difined."?>
+  <?endif?>
+  
+  <?if "$(var.Configuration)"="Debug"?>
+  <?define FilesFolderPath="..\Csv4180.FileExtension\bin\$(var.Configuration)\"?>
+  <?define AppVersion=1.0.21?>
+  <?define ProductUpgradeCode="{1A21A4B7-0174-459B-BEAC-F0A32652F515}"?>
+  <?endif?>
 
-  <?define ProductUpgradeCode="8FCA08C9-3406-4AAB-8481-638CBDBCE918"?>
+  <?ifndef AppVersion ?>
+  <?error "AppVersion is not difined."?>
+  <?endif?>
+  <?ifndef ProductUpgradeCode ?>
+  <?error "ProductUpgradeCode is not difined."?>
+  <?endif?>
+  <?ifndef FilesFolderPath ?>
+  <?error "FilesFolderPath is not difined."?>
+  <?endif?>
+
   <?define ProductName="CSV 4180"?>
   <?define HostName="Excel"?>
 
   <?define ConverterClassID="{AE9845CC-E17B-46E4-9D7B-6F94CF5900D9}"?>
   <?define ConverterPreferencesClassID="{48CD5D68-D510-498F-9F1E-076AC6076A34}"?>
 
-  <?define CurrentAssemblyVersion="$(var.AppVersion)"?>
+  <?define CurrentAssemblyVersion="$(var.AppVersion).0"?>
   <?define AssemblyIdentifier="DocInOffice.Csv4180.FileExtension, Version=$(var.CurrentAssemblyVersion), Culture=neutral, PublicKeyToken=b2ab273a354b85f8"?>
   <?define ConverterClassName="DocInOffice.Csv4180.FileExtension.Converter"?>
   <?define ConverterPreferencesClassName="DocInOffice.Csv4180.FileExtension.ConverterPreferences"?>
