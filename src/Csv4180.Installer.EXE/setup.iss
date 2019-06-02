@@ -233,7 +233,7 @@ begin
     case ProcessStatus of
 	  psError:                                       WizardForm.FinishedLabel.Caption := CustomMessage('UnsuccessfulFinish');
 	  psFrameworkRebootRequired:                     WizardForm.FinishedLabel.Caption := CustomMessage('RestartFrameworkInstallationMessage');
-    psPreviousProgramUninstallationRebootRequired: WizardForm.FinishedLabel.Caption := FmtMessage(CustomMessage('RebootPreviousProductUninstallationMessage'), [PreviousProgramVersion]);
+      psPreviousProgramUninstallationRebootRequired: WizardForm.FinishedLabel.Caption := FmtMessage(CustomMessage('RebootPreviousProductUninstallationMessage'), [PreviousProgramVersion]);
    // psProgramInstallationRebootRequired:           WizardForm.FinishedLabel.Caption := CustomMessage('');
     end;
   end;
