@@ -43,8 +43,8 @@
     <!--<Property Id='ARPHELPTELEPHONE'>URL for technical support</Property>-->
     <!--<Property Id='ARPREADME'>path</Property>-->
     <!--<Property Id='ARPSIZE'>app size in kilobytes</Property>-->
-    <!--<Property Id="ARPNOREPAIR">1</Property>-->
-    <!--<Property Id="ARPNOMODIFY">1</Property>-->
+    <Property Id="ARPNOREPAIR">1</Property>
+    <Property Id="ARPNOMODIFY">1</Property>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <Icon Id="icon.ico" SourceFile="csv-4180.ico"/>

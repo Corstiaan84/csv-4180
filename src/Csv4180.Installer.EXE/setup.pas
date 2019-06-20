@@ -145,7 +145,7 @@ var
   PcchValueBuf: DWORD;
 begin
   SetLength(ProductBuf, 39);
-  if MsiEnumRelatedProducts(upgradeCode, 0, 0, ProductBuf) <> ERROR_SUCCESS then
+  if MsiEnumRelatedProducts(UpgradeCode, 0, 0, ProductBuf) <> ERROR_SUCCESS then
   begin
     PreviousProductId := '';
     PreviousProductVersion := '';

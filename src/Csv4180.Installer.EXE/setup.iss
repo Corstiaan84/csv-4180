@@ -143,7 +143,7 @@ procedure InitializeWizard();
 begin
   Log('InitializeWizard');
 
-    Log('Upgrade Code: {#UpgradeCode}');
+  Log('Upgrade Code: {#UpgradeCode}');
   if GetPreviousProduct('{#UpgradeCode}', {OUT} PreviousProgramId, {OUT} PreviousProgramVersion, {OUT} PreviousProgramFolderPath) then
   begin
     Log('Previous program id: ' + PreviousProgramId);

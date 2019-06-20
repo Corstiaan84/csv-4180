@@ -3,11 +3,12 @@
          ToolsVersion="15.0"
          DefaultTargets="Build">
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+  <!--<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <AppVersion Condition=" '$(AppVersion)' == ''">1.0.21</AppVersion>
+    <ProductUpgradeCode Condition=" '$(ProductUpgradeCode)' == '' ">{8FCA08C9-3406-4AAB-8481-638CBDBCE918}</ProductUpgradeCode>
     <Msi32Path>..\Csv4180.Installer.MSI\bin\x86\Release\en-US\CSV_4180.msi</Msi32Path>
     <Msi64Path>..\Csv4180.Installer.MSI\bin\x64\Release\en-US\CSV_4180.msi</Msi64Path>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <ItemGroup>
     <IssIdentifier Include="Configuration">
@@ -29,7 +30,7 @@
       <Value>..\Libraries\dotNetFx40_Full_setup.exe</Value>
     </IssIdentifier>
     <IssIdentifier Include="UpgradeCode">
-      <Value>{8FCA08C9-3406-4AAB-8481-638CBDBCE918}</Value>
+      <Value>$(ProductUpgradeCode)</Value>
     </IssIdentifier>
     
     <IssIdentifier Include="OutputDir">
@@ -45,6 +46,7 @@
   <Target Name="AssertProperties">
     <Error Condition=" '$(Configuration)' == '' " Text="The Configuration property is not defined." />
     <Error Condition=" '$(AppVersion)' == '' " Text="The AppVersion property is not defined." />
+    <Error Condition=" '$(ProductUpgradeCode)' == '' " Text="The ProductUpgradeCode property is not defined." />
     <Error Condition=" '$(Msi32Path)' == '' " Text="The Msi32Path property is not defined." />
     <Error Condition=" '$(Msi64Path)' == '' " Text="The Msi64Path property is not defined." />
   </Target>

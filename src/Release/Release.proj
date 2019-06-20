@@ -80,7 +80,7 @@
     </PropertyGroup>
     <Message Text="Msi32Path: $(Msi32Path)" />
     <Message Text="Msi64Path: $(Msi64Path)" />
-    <MSBuild Projects="..\Csv4180.Installer.EXE\ExeSetup.proj" Properties="Configuration=$(Configuration);AppVersion=$(AppVersion);Msi32Path=$(Msi32Path);Msi64Path=$(Msi64Path)" />
+    <MSBuild Projects="..\Csv4180.Installer.EXE\ExeSetup.proj" Properties="Configuration=$(Configuration);AppVersion=$(AppVersion);ProductUpgradeCode=$(ProductUpgradeCode);Msi32Path=$(Msi32Path);Msi64Path=$(Msi64Path)" />
   </Target>
   <Target Name="CopySetupFile">
     <ItemGroup>
