@@ -1,8 +1,4 @@
-﻿//
-// Copyright © Leonid S. Maliutin <mals@live.ru> 2014
-//
-
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;

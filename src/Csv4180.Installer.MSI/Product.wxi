@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
-    Copyright © Leonid Maliutin <mals@live.ru> 2019
--->
 <Include>
   <?ifndef Configuration ?>
   <?error "AppVersion is not difined."?>

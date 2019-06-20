@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-    Copyright © Leonid Maliutin <mals@live.ru> 2016
--->
 <?include ..\Product.wxi?>
 <?if $(var.Platform)="x64"?>
 <?define SupportedWin64=yes;no ?>

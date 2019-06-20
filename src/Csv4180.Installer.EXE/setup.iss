@@ -1,4 +1,3 @@
-; Copyright © Leonid Maliutin <mals@live.ru> 2019
 #ifndef Configuration
   //#define Configuration "Debug"
 #endif
@@ -45,7 +44,6 @@
 #define OutputBaseFilename "CSV_4180_v" + AppVersion
 
 #define appPublisher "Leonid Maliutin"
-#define copyright "Copyright © Leonid Maliutin <mals@live.ru> 2019"
 #define netSetupFile "dotnetfx.exe"
 #define msiSetupFile "setup.msi"
 
@@ -58,7 +56,6 @@ MinVersion=0,5.01sp3
 
 AppVerName={#AppName} v{#AppVersion}
 
-AppCopyright={#copyright}
 AppPublisher={#appPublisher}
 
 Uninstallable=no

@@ -1,8 +1,4 @@
-﻿//
-// Copyright © Leonid S. Maliutin <mals@live.ru> 2015
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Linq;
