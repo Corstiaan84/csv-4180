@@ -13,3 +13,16 @@ The CSV 4180 extension stores a Microsoft Excel spreadsheet in a csv file, accor
 ![](images/save-window.png)
 
 The data is stored as it is displayed in the cells themselves and is separated by commas.
+
+----
+
+# Build commands
+
+Without signing:
+
+    msbuild ./src/Release/Release.proj
+    
+
+With signing:
+
+    msbuild /p:SignPassword=***** ./src/Release/Release.proj
