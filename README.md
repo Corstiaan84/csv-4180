@@ -3,14 +3,14 @@ The program CSV 4180 is an extension for Microsoft Excel and is designed to work
 
 # Opening a csv file in Excel
 All data is loaded into Excel cells as string values according to RFC 4180.  
-![](images/open-window.png)
+![](images/open-window.jpg)
 
 Thus, the csv file is converted to the correct table.  
 ![](images/feature-1.jpg)
 
 # Saving Excel data to CSV
 The CSV 4180 extension stores a Microsoft Excel spreadsheet in a csv file, according to the RFC 4180 standard.  
-![](images/save-window.png)
+![](images/save-window.jpg)
 
 The data is stored as it is displayed in the cells themselves and is separated by commas.
 
