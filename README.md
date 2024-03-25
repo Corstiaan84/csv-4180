@@ -1,4 +1,7 @@
 # The description of CSV 4180
+
+[![BuiltWithDot.Net shield](https://builtwithdot.net/project/428/csv-4180-for-excel-csv/badge)](https://builtwithdot.net/project/428/csv-4180-for-excel-csv)
+
 The program CSV 4180 is an extension for Microsoft Excel and is designed to work with CSV files (Comma-Separated Values). CSV 4180 is integrated into Microsoft Excel and allows you to load and save data to an Excel spreadsheet from a CSV file according to the RFC 4180 standard.
 
 # Opening a csv file in Excel
